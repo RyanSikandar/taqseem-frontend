@@ -70,7 +70,7 @@ const Page = () => {
                   Email
                 </FormLabel>
                 <FormControl>
-                  <Input disabled={isLoading} className="border-b-2 border-gray-300 focus:border-black outline-none rounded-lg w" {...field} />
+                  <Input disabled={isLoading} className="border-b-2 border-gray-300 focus:border-black outline-none bg-[#EEEEEE]" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -87,7 +87,7 @@ const Page = () => {
                   <Input
                     type="password"
                     disabled={isLoading}
-                    className="border-b-2 border-gray-300 focus:border-black outline-none rounded-lg"
+                    className="border-b-2 border-gray-300 focus:border-black outline-none bg-[#EEEEEE]"
                     {...field}
                   />
                 </FormControl>
