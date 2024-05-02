@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Image from "next/image";
 import {
   Form,
   FormControl,
@@ -29,7 +30,19 @@ const Page = () => {
   };
 
   return (
-    <div className="flex h-[500px] w-full flex-col space-y-6">
+    <div className="flex h-full w-full flex-col space-y-6">
+      
+       <div className="flex justify-center items-center">
+            <Image
+              src="/assets/icons/Taqseem.svg"
+              alt="icon"
+              width={100}
+              height={100}
+              style={{ objectFit: "contain"}}
+            />
+        </div>
+
+        
       <div className="flex flex-col justify-center items-center">
         <h1 className=" text-2xl font-normal">Login</h1>
         <a>Welcome back! Please enter your details.</a>
