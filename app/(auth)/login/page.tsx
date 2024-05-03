@@ -36,7 +36,7 @@ const Page = () => {
   return (
     <div className="flex h-full w-full flex-col space-y-6">
 
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center mx-auto">
         <Image
           src="/assets/icons/Taqseem.svg"
           alt="icon"
@@ -47,8 +47,8 @@ const Page = () => {
       </div>
 
 
-      <div className="flex flex-col justify-center items-center">
-        <h1 className=" text-2xl font-semibold mb-2 tracking-[2px]">Login</h1>
+      <div className="flex flex-col justify-center items-center mx-auto ">
+        <h1 className=" text-2xl font-semibold tracking-[10px] mb-4">Login</h1>
         <div>
           <span className="">{text}</span>
           <Cursor cursorColor='black' />
@@ -125,16 +125,21 @@ const Page = () => {
           {isLoading ? (
             <div className="flex gap-2">Loading...</div>
           ) : (
-            "Continue as Guest"
+            "Continue as Donor"
           )}
         </Button>
 
-        <p className="flex justify-center item-cente">or</p>
+        <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+          <span style={{ flex: 1, height: '1px', backgroundColor: '#000' }}></span>
+          <span style={{ margin: '0 10px' }}>or</span>
+          <span style={{ flex: 1, height: '1px', backgroundColor: '#000' }}></span>
+        </div>
+
 
         <Button
           variant="default"
           size="lg"
-          className=" mt-2 text-lg rounded-[6px] border-2 border-black bg-white px-4 py-6 text-black"
+          className=" mt-2 text-lg rounded-[6px] border-2 border-black bg-white px-4 py-6 text-black  hover:text-white hover:bg-black"
           type="submit"
         >
           {isLoading ? (
@@ -148,7 +153,7 @@ const Page = () => {
         <Button
           variant="default"
           size="lg"
-          className=" mt-2 text-lg rounded-[6px] border-2 border-black bg-white px-4 py-6 text-black"
+          className=" mt-2 text-lg rounded-[6px] border-2 border-black bg-white px-4 py-6 text-black hover:text-white hover:bg-black"
           type="submit"
         >
           {isLoading ? (
