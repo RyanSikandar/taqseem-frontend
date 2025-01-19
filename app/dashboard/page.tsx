@@ -10,8 +10,8 @@ export default function Page() {
     {
       id: '1',
       author: {
-        name: 'Samantha',
-        location: 'Chennai, Tamilnadu',
+        name: 'Rayan Sikandar',
+        location: 'Islamabad, Pakistan',
         avatar: '/assets/images/avatar.png',
       },
       image: '/assets/images/needy.webp',
@@ -24,11 +24,25 @@ export default function Page() {
     {
       id: '2',
       author: {
-        name: 'Ramkumar',
+        name: 'Umer Ali',
         location: 'Madurai, Tamilnadu',
         avatar: '/assets/images/avatar2.png',
       },
-      image: '/assets/images/community-center.webp',
+      image: '/assets/images/needy.webp',
+      title: 'Support our community center expansion',
+      description: 'Help us expand our community center to provide more services and programs for our local residents. Your contribution will make a significant impact on the lives of many in our community.',
+      currentAmount: 5000,
+      targetAmount: 10000,
+      daysLeft: 3,
+    },
+    {
+      id: '3',
+      author: {
+        name: 'Umer Ali',
+        location: 'Madurai, Tamilnadu',
+        avatar: '/assets/images/avatar2.png',
+      },
+      image: '/assets/images/needy.webp',
       title: 'Support our community center expansion',
       description: 'Help us expand our community center to provide more services and programs for our local residents. Your contribution will make a significant impact on the lives of many in our community.',
       currentAmount: 5000,
@@ -45,7 +59,6 @@ export default function Page() {
     <div className="min-h-screen bg-gray-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="py-8 sm:py-12">
-          {/* Grid Container */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {samplePosts.map(post => (
               <div key={post.id} className="flex">

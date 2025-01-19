@@ -50,14 +50,14 @@ export function DonationCard({ post, onDonate }: DonationCardProps) {
 
           <div className="flex items-center justify-between py-1 text-xs">
             <div className="flex items-center gap-1">
-              <span className="font-semibold">₹{post.currentAmount}</span>
-              <span className="text-muted-foreground">/ ₹{post.targetAmount}</span>
+              <span className="font-semibold">Rs. {post.currentAmount}</span>
+              <span className="text-muted-foreground">/ Rs. {post.targetAmount}</span>
             </div>
             <span className="text-muted-foreground">{post.daysLeft} days left</span>
           </div>
         </div>
         <Button
-          className="w-full bg-blue-600 hover:bg-blue-700 text-sm py-1"
+          className="w-full bg-black hover:bg-[#F7AB0A] text-sm py-1"
           onClick={onDonate}
         >
           Donate
