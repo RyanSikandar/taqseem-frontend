@@ -24,11 +24,14 @@ export function SideMenu() {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="p-2">
-          <Menu className="w-5 h-5" />
+          <Menu className="w-6 h-6" />
         </Button>
       </SheetTrigger>
       <SheetContent side="left">
         <div>
+          <div className="py-3">
+            <img src="/assets/icons/Taqseem.svg" alt="logo" className="w-25 h-20" />
+          </div>
           <div className="py-3">
             <Link href="#">
               <div className="flex text-xl">
@@ -73,7 +76,7 @@ export function SideMenu() {
           </div>
         </div>
         <SheetFooter>
-          <Button className="mt-24">
+          <Button className="mt-5">
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
               className="w-4 mr-4"
