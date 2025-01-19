@@ -17,7 +17,8 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-const Page = () => {
+import Link from "next/link";
+const Login = () => {
   const [text, count] = useTypewriter({ words: ["Hi, We missed you.", "Please Login to spread happiness !"], loop: true, delaySpeed: 2000 })
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -164,12 +165,15 @@ const Page = () => {
         </Button>
       </Form>
       <div className="flex justify-center items-center mt-6">
-        <a className="text-sm text-neutral-500 dark:text-neutral-400">
+        {/* <a className="text-sm text-neutral-500 dark:text-neutral-400">
           Don't have an account? <span className="text-[#F7AB0A] underline hover:cursor-pointer"> Sign up </span>
-        </a>
+        </a> */}
+        <Link href="/register" className="text-sm text-neutral-500 dark:text-neutral-400">
+          Don't have an account? <span className="text-[#F7AB0A] underline hover:cursor-pointer"> Sign up </span>
+        </Link>
       </div>
     </div>
   );
 };
 
-export default Page;
+export default Login;
