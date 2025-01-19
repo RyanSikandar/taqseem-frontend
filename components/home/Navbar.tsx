@@ -28,14 +28,14 @@ export default function Navbar() {
       {/* Action buttons */}
       <div className="flex px-4 pb-3 gap-4 overflow-x-auto justify-around">
         <Button
-          className={`rounded-full px-6 ${activePage === 'donate' ? 'bg-[#F7AB0A]' : 'bg-black hover:bg-[#F7AB0A]/80'
+          className={`rounded-full px-6 ${activePage === 'donate' ? 'bg-[#F7AB0A] hover:bg-[#F7AB0A]/80' : 'bg-black hover:bg-[#F7AB0A]/80'
             }`}
           onClick={() => handleButtonClick('donate')}
         >
           Donate
         </Button>
         <Button
-          className={`rounded-full px-6 ${activePage === 'volunteer' ? 'bg-[#F7AB0A]' : 'bg-black hover:bg-[#F7AB0A]/80'
+          className={`rounded-full px-6 ${activePage === 'volunteer' ? 'bg-[#F7AB0A] hover:bg-[#F7AB0A]/80' : 'bg-black hover:bg-[#F7AB0A]/80'
             }`}
           onClick={() => handleButtonClick('volunteer')}
         >
