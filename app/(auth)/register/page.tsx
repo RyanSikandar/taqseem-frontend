@@ -13,6 +13,7 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
+
 const Page = () => {
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
@@ -31,104 +32,107 @@ const Page = () => {
   };
 
   return (
-    <div className="flex h-[500px] w-[500px] flex-col items-center justify-center space-y-4  shadow-xl">
-      <h1 className="text-2xl font-bold">Register</h1>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(handleSubmit)}
-          className="flex flex-col items-center justify-center space-y-4"
-        >
-          <FormField
-            control={form.control}
-            name="email"
-            
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-xs uppercase dark:text-primary ">
-                  Email
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={isLoading}
-                    className="border-0 bg-zinc-200/60 ring-offset-0 focus-visible:ring-0 dark:bg-input"
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-xs uppercase dark:text-primary ">
-                  Name
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={isLoading}
-                    className="border-0 bg-zinc-200/60 ring-offset-0 focus-visible:ring-0 dark:bg-input"
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-xs uppercase dark:text-primary ">
-                  password
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    type="password"
-                    disabled={isLoading}
-                    className="border-0 bg-zinc-200/60  ring-offset-0 
-                                    focus-visible:ring-0 dark:bg-input"
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-xs uppercase dark:text-primary ">
-                  Confirm Password
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    type="password"
-                    disabled={isLoading}
-                    className="border-0 bg-zinc-200/60  ring-offset-0 
-                                    focus-visible:ring-0 dark:bg-input"
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <Button
-            variant="default"
-            size="lg"
-            className=" mt-2 rounded-[3px] bg-black px-4 py-0.5 text-white"
-            type="submit"
+    <div className="flex min-h-screen w-full items-center justify-center px-4 py-8">
+      <div className="w-full max-w-[320px] space-y-6 rounded-lg bg-white p-6 shadow-xl sm:max-w-[400px] md:max-w-[500px] md:p-8 lg:p-10">
+        <h1 className="text-center text-2xl font-bold sm:text-3xl md:text-4xl">Register</h1>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="space-y-4 md:space-y-6"
           >
-            {isLoading ? (
-              <div className="flex gap-2">Loading...</div>
-            ) : (
-              "Sign up"
-            )}
-          </Button>
-        </form>
-      </Form>
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-xs uppercase dark:text-primary md:text-sm">
+                    Email
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isLoading}
+                      className="h-10 border-0 bg-zinc-200/60 ring-offset-0 focus-visible:ring-0 dark:bg-input md:h-12"
+                      placeholder="Enter your email"
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-xs uppercase dark:text-primary md:text-sm">
+                    Name
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isLoading}
+                      className="h-10 border-0 bg-zinc-200/60 ring-offset-0 focus-visible:ring-0 dark:bg-input md:h-12"
+                      placeholder="Enter your name"
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-xs uppercase dark:text-primary md:text-sm">
+                    Password
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      disabled={isLoading}
+                      className="h-10 border-0 bg-zinc-200/60 ring-offset-0 focus-visible:ring-0 dark:bg-input md:h-12"
+                      placeholder="Enter your password"
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-xs uppercase dark:text-primary md:text-sm">
+                    Confirm Password
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      disabled={isLoading}
+                      className="h-10 border-0 bg-zinc-200/60 ring-offset-0 focus-visible:ring-0 dark:bg-input md:h-12"
+                      placeholder="Confirm your password"
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <Button
+              variant="default"
+              size="lg"
+              className="mt-6 w-full rounded-[3px] bg-black px-4 py-2 text-sm font-medium text-white transition-all hover:bg-black/90 md:py-3 md:text-base"
+              type="submit"
+            >
+              {isLoading ? (
+                <div className="flex items-center justify-center gap-2">Loading...</div>
+              ) : (
+                "Sign up"
+              )}
+            </Button>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 };

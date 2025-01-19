@@ -1,102 +1,66 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMagnifyingGlass,
-  faBars,
-  faUser,
-  faPeopleRoof,
-  faHouse,
-  faLocationDot,
-  faTrophy,
-  faHeart,
-  faArrowRightFromBracket,
-} from "@fortawesome/free-solid-svg-icons";
+import { Search, Menu } from 'lucide-react';
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import {
   Sheet,
   SheetContent,
-  SheetFooter,
   SheetTrigger,
 } from "@/components/ui/sheet";
 
 export default function Navbar() {
   return (
-    <>
-      <div className="flex items-center justify-around w-screen h-20 flex-nowrap">
+    <header className="fixed top-0 left-0 right-0 bg-white border-b z-50">
+      <div className="flex items-center justify-between px-4 h-14">
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="ghost">
-              <FontAwesomeIcon icon={faBars} className="w-8" />
+            <Button variant="ghost" size="icon" className="p-2">
+              <Menu className="w-5 h-5" />
             </Button>
           </SheetTrigger>
           <SheetContent side="left">
-            <div>
-              <div className="py-3">
-                <Link href="#">
-                  <div className="flex text-xl">
-                    <FontAwesomeIcon icon={faUser} className="w-4 mr-4" />
-                    <p>Profile</p>
-                  </div>
-                </Link>
-              </div>
-              <div className="py-3">
-                <Link href="#">
-                  <div className="flex text-xl">
-                    <FontAwesomeIcon icon={faPeopleRoof} className="w-4 mr-4" />
-                    <p>Community</p>
-                  </div>
-                </Link>
-              </div>
-              <div className="py-3">
-                <Link href="#" className="flex text-xl">
-                  <FontAwesomeIcon icon={faHouse} className="w-4 mr-4" />
-                  <p>Near Shelter</p>
-                </Link>
-              </div>
-              <div className="py-3">
-                <Link href="#" className="flex text-xl">
-                  <FontAwesomeIcon icon={faLocationDot} className="w-4 mr-4" />
-                  <p>Location</p>
-                </Link>
-              </div>
-              <div className="py-3">
-                <Link href="#">
-                  <div className="flex text-xl">
-                    <FontAwesomeIcon icon={faTrophy} className="w-4 mr-4" />
-                    <p>Reward</p>
-                  </div>
-                </Link>
-              </div>
-              <div className="py-3">
-                <Link href="#" className="flex text-xl">
-                  <FontAwesomeIcon icon={faHeart} className="w-4 mr-4" />
-                  <p>Favourite</p>
-                </Link>
-              </div>
+            <div className="flex flex-col gap-4 mt-8">
+              <Link href="/donate">
+                <Button variant="ghost" className="w-full justify-start text-lg">
+                  Donate
+                </Button>
+              </Link>
+              <Link href="/volunteer">
+                <Button variant="ghost" className="w-full justify-start text-lg">
+                  Volunteer
+                </Button>
+              </Link>
             </div>
-            <SheetFooter>
-              <Button className="mt-24">
-                <FontAwesomeIcon
-                  icon={faArrowRightFromBracket}
-                  className="w-4 mr-4"
-                />
-                Log Out
-              </Button>
-            </SheetFooter>
           </SheetContent>
         </Sheet>
-        <Image
-          className="relative"
-          src="/assets/icons/Taqseem.svg"
-          alt="icon"
-          width={100}
-          height={100}
-          style={{ objectFit: "contain" }}
-        />
-        <FontAwesomeIcon icon={faMagnifyingGlass} className="w-8" />
+
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded-full bg-blue-600" />
+          <span className="font-semibold">UnityHub</span>
+        </div>
+
+        <Button variant="ghost" size="icon" className="p-2">
+          <Search className="w-5 h-5" />
+        </Button>
       </div>
-    </>
+
+      {/* Action buttons */}
+      <div className="flex px-4 pb-3 gap-4 overflow-x-auto">
+        <Button className="bg-blue-600 hover:bg-blue-700 rounded-full px-6">
+          Donate
+        </Button>
+        <Button variant="ghost" className="rounded-full px-6">
+          Support
+        </Button>
+        <Button variant="ghost" className="rounded-full px-6">
+          Volunteer
+        </Button>
+        <Button variant="ghost" className="rounded-full px-6">
+          Accommodate
+        </Button>
+      </div>
+    </header>
   );
 }
+
