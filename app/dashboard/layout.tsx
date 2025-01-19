@@ -8,7 +8,9 @@ export default function Layout({ children }: LayoutProps) {
     return (
         <div className="min-h-screen bg-white">
             <Navbar />
-            {children}
+            <main className="pt-16 md:pt-20">
+                {children}
+            </main>
         </div>
     );
 }
