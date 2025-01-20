@@ -1,9 +1,6 @@
 'use client'
 
-import { useState } from 'react'
-import { Header } from '@/components/ui/header'
 import { DonationCard } from '@/components/ui/donation-card'
-import type { Post } from '@/types/post'
 import { samplePosts } from '@/data/samplePosts'
 
 export default function Page() {
