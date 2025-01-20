@@ -5,7 +5,7 @@ export interface Post {
       location: string;
       avatar: string;
    };
-    image: string;
+    image: string[];
     title: string;
     description: string;
     targetAmount: number;
