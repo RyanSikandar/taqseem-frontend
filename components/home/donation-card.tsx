@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import type { Post } from '@/types/post'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 interface DonationCardProps {
   post: Post;
@@ -14,6 +16,7 @@ interface DonationCardProps {
 }
 
 export function DonationCard({ post, onDonate }: DonationCardProps) {
+  const router = useRouter();
   const [isLiked, setIsLiked] = useState(false)
 
   const handleLike = () => {
@@ -34,6 +37,8 @@ export function DonationCard({ post, onDonate }: DonationCardProps) {
     }
   }
 
+
+
   // Calculate the progress percentage
   const progressPercentage = (post.currentAmount / post.targetAmount) * 100
 
@@ -41,7 +46,7 @@ export function DonationCard({ post, onDonate }: DonationCardProps) {
     <Card className="border shadow-md max-w-sm mx-auto">
       <div className="relative rounded-lg overflow-hidden h-48">
         <Image
-          src={post.image || "/placeholder.svg"}
+          src={post.image[0] || "/placeholder.svg"}
           alt={post.title}
           layout="fill"
           objectFit="cover"
@@ -49,7 +54,9 @@ export function DonationCard({ post, onDonate }: DonationCardProps) {
       </div>
       <CardContent className="p-4 space-y-3">
         <div className="space-y-2">
-          <h2 className="text-base font-semibold">{post.title}</h2>
+          <Link href={`/donation/${post.id}`}>
+            <h2 className="text-base font-semibold hover:underline">{post.title}</h2>
+          </Link>
           <p className="text-xs text-muted-foreground line-clamp-2">{post.description}</p>
 
           <div className="space-y-2">
@@ -65,7 +72,9 @@ export function DonationCard({ post, onDonate }: DonationCardProps) {
         </div>
         <Button
           className="w-full bg-black hover:bg-[#F7AB0A] text-sm py-1"
-          onClick={onDonate}
+          onClick={() => {
+            router.push(`/donation/${post.id}`)
+          }}
         >
           Donate
         </Button>
