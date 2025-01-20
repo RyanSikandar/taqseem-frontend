@@ -1,26 +1,25 @@
-"use client";
+'use client'
 
 import React, { useState } from "react";
+import { Search } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { SideMenu } from "./SideMenu";
-import { Command, CommandInput } from "@/components/ui/command";
 import { useNavigation } from "@/context/navigation-context";
 
 export default function Navbar() {
-  const {activeTab, setActiveTab} = useNavigation();
+  const { activeTab, setActiveTab } = useNavigation();
 
   return (
-    <div className="fixed top-0 left-0 right-0 pb-2 bg-white border-b z-50 opacity-100 flex flex-col items-center">
-      <div className="flex items-center justify-between px-4 h-14 w-full">
+    <header className="fixed top-0 left-0 right-0 bg-white border-b z-50 opacity-100 ">
+      <div className="flex items-center justify-between px-4 h-14">
         <SideMenu />
         <div className="flex items-center gap-2">
-          <img
-            src="/assets/icons/Taqseem.svg"
-            alt="logo"
-            className="w-25 h-20"
-          />
+          <img src="/assets/icons/Taqseem.svg" alt="logo" className="w-25 h-20" />
         </div>
-        <div></div>
+
+        <Button variant="ghost" size="icon" className="p-2">
+          <Search className="w-5 h-5" />
+        </Button>
       </div>
 
       {/* Action buttons */}
@@ -39,14 +38,8 @@ export default function Navbar() {
         >
           Volunteer
         </Button>
-      <div className="w-full flex justify-center items-center py-4">
-        <div className="w-1/2 rounded-lg border-2 border-gray-100">
-          <Command>
-            <CommandInput placeholder="search for a cause" />
-          </Command>
-        </div>
       </div>
-    </div>
-  </div>
+    </header>
   );
 }
+
