@@ -33,7 +33,7 @@ export function FavouritesProvider({ children }: { children: React.ReactNode }) 
         const initialize = async () => {
             try {
                 const database = await initDB();
-                setDb(db);
+                setDb(database);
                 const data = await database.getAll(STORE_NAME);
                 setFavourites(data);
                 setIsLoading(false);
@@ -59,12 +59,14 @@ export function FavouritesProvider({ children }: { children: React.ReactNode }) 
     }, [])
 
     const toggleFavourite = async (post: Post) => {
+        console.log('post', post);
         if (!db) {
             return;
         }
 
         try {
             const existingPost = await db.get(STORE_NAME, post.id);
+            console.log('existingPost', existingPost);
             if (existingPost) {
                 await db.delete(STORE_NAME, post.id);
                 setFavourites(favourites.filter(fav => fav.id !== post.id));

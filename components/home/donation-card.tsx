@@ -23,6 +23,7 @@ export function DonationCard({ post, onDonate }: DonationCardProps) {
   console.log(favourites);
 
   const handleLike = () => {
+    console.log('Like button clicked');
     toggleFavourite(post)
   }
 
