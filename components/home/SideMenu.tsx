@@ -11,9 +11,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
   faPeopleRoof,
-  faHouse,
-  faLocationDot,
-  faTrophy,
   faHeart,
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
@@ -41,31 +38,9 @@ export function SideMenu() {
             </Link>
           </div>
           <div className="py-3">
-            <Link href="#">
-              <div className="flex text-xl">
-                <FontAwesomeIcon icon={faPeopleRoof} className="w-4 mr-4" />
-                <p>Community</p>
-              </div>
-            </Link>
-          </div>
-          <div className="py-3">
             <Link href="#" className="flex text-xl">
-              <FontAwesomeIcon icon={faHouse} className="w-4 mr-4" />
-              <p>Near Shelter</p>
-            </Link>
-          </div>
-          <div className="py-3">
-            <Link href="#" className="flex text-xl">
-              <FontAwesomeIcon icon={faLocationDot} className="w-4 mr-4" />
-              <p>Location</p>
-            </Link>
-          </div>
-          <div className="py-3">
-            <Link href="#">
-              <div className="flex text-xl">
-                <FontAwesomeIcon icon={faTrophy} className="w-4 mr-4" />
-                <p>Reward</p>
-              </div>
+              <FontAwesomeIcon icon={faPeopleRoof} className="w-4 mr-4" />
+              <p>Add a Donation</p>
             </Link>
           </div>
           <div className="py-3">
