@@ -2,6 +2,7 @@
 import { Post } from "@/types";
 import { createContext, useContext, useEffect, useState } from "react";
 import { openDB, type IDBPDatabase } from 'idb';
+import { set } from "zod";
 
 interface FavouriteContextType {
     favourites: Post[];
@@ -32,6 +33,7 @@ export function FavouritesProvider({ children }: { children: React.ReactNode }) 
     useEffect(() => {
         const initialize = async () => {
             try {
+                setIsLoading(true);
                 const database = await initDB();
                 setDb(database);
                 const data = await database.getAll(STORE_NAME);
@@ -59,7 +61,6 @@ export function FavouritesProvider({ children }: { children: React.ReactNode }) 
     }, [])
 
     const toggleFavourite = async (post: Post) => {
-        console.log('post', post);
         if (!db) {
             return;
         }
