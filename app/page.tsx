@@ -1,5 +1,4 @@
 import Hero from "@/components/home/Hero";
-import Login from "./(auth)/login/page";
 
 export default function Home() {
   return (
