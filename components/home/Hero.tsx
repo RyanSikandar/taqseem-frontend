@@ -20,7 +20,7 @@ const Hero1 = () => {
                             Welcome to <span className="text-[#F7AB0A]">Taqseem</span>
                         </h1>
                         <p className="mb-8 max-w-xl text-muted-foreground lg:text-xl">
-                            Tqasem was made with the intention to connect donors and volunteers with people in whose lives they can make a <span className="text-[#F7AB0A]/90 ">difference</span>.
+                            Taqseem was made with the intention to connect donors and volunteers with people in whose lives they can make a <span className="text-[#F7AB0A]/90 ">difference</span>.
                         </p>
                         <div className="flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start">
                             <Button className="w-full sm:w-auto" onClick={

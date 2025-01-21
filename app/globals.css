@@ -72,6 +72,7 @@
       --ring: 212.7 26.8% 83.9%;
     }
   }
+  
 
   @layer base {
     * {
@@ -80,4 +81,14 @@
     body {
       @apply bg-background text-foreground;
     }
+  }
+  .dotted {
+    --dot-bg: #f9fafb;
+    --dot-color: #000;
+    --dot-size: 1px;
+    --dot-space: 50px;
+    background:
+      linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+      linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+      var(--dot-color);
   }
