@@ -38,7 +38,7 @@ export function SideMenu() {
             </Link>
           </div>
           <div className="py-3">
-            <Link href="#" className="flex text-xl">
+            <Link href="/add-donation" className="flex text-xl">
               <FontAwesomeIcon icon={faPeopleRoof} className="w-4 mr-4" />
               <p>Add a Donation</p>
             </Link>
