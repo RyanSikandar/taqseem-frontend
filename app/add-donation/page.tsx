@@ -13,6 +13,8 @@ interface FormData {
     topic: string
     description: string
     cause: string
+    amount: number
+    days: number
 }
 
 export default function RaiseCause() {
@@ -24,6 +26,7 @@ export default function RaiseCause() {
         handleSubmit,
         setValue,
         watch,
+        reset,
         formState: { errors },
     } = useForm<FormData>()
 
@@ -36,6 +39,8 @@ export default function RaiseCause() {
         }
         console.log("Form data:", data)
         console.log("Images:", images)
+        reset()
+        setImages([])
     }
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -165,6 +170,24 @@ export default function RaiseCause() {
                             </Select>
                             {errors.cause && <p className="text-sm text-red-500">{errors.cause.message}</p>}
 
+                        </div>
+                        <div className="space-y-2">
+                            <label htmlFor="amount" className="text-sm font-medium">
+                                Amount Needed
+                            </label>
+                            <div className="flex items-center space-x-2">
+                                <p className="text-sm font-medium">Rs. </p>
+                                <Input type="number" {...register("amount", { required: true })} id="amount" placeholder="7000" />
+                            </div>
+                            {errors.amount && <p className="text-sm text-red-500">Amount is required</p>}
+                        </div>
+
+                        <div className="space-y-2">
+                            <label htmlFor="amount" className="text-sm font-medium">
+                                Days Left
+                            </label>
+                            <Input type="number" {...register("days", { required: true })} id="days-left" placeholder="eg. 7" />
+                            {errors.days && <p className="text-sm text-red-500">Days Left is required</p>}
                         </div>
 
                         {/* Submit Button */}
