@@ -12,6 +12,7 @@ import {
   faUser,
   faPeopleRoof,
   faHeart,
+  faHome,
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { Menu } from 'lucide-react';
@@ -31,6 +32,14 @@ export function SideMenu() {
             <img src="/assets/icons/Taqseem.svg" alt="logo" className="w-25 h-20" />
           </div>
           </Link>
+          <div className="py-3">
+            <Link href="/dashboard">
+              <div className="flex text-xl">
+                <FontAwesomeIcon icon={faHome} className="w-4 mr-4" />
+                <p>Home</p>
+              </div>
+            </Link>
+          </div>
           <div className="py-3">
             <Link href="#">
               <div className="flex text-xl">
