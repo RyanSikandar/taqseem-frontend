@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress"
 import type { Post } from '@/types/post'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useFavourites } from '@/context/favourites-context'
 
 interface DonationCardProps {
   post: Post;
@@ -17,10 +18,13 @@ interface DonationCardProps {
 
 export function DonationCard({ post, onDonate }: DonationCardProps) {
   const router = useRouter();
-  const [isLiked, setIsLiked] = useState(false)
+  const { favourites, toggleFavourite } = useFavourites();
+  const isLiked = favourites.some(fav => fav.id === post.id)
+  console.log(favourites);
 
   const handleLike = () => {
-    setIsLiked(!isLiked)
+    console.log('Like button clicked');
+    toggleFavourite(post)
   }
 
   const handleShare = async () => {
