@@ -41,7 +41,7 @@ export function VolunteerCard({ post, onVolunteer }: VolunteerCardProps) {
     <Card className="border shadow-md max-w-sm mx-auto">
       <div className="relative rounded-lg overflow-hidden h-48">
         <Image
-          src={post.image || "/placeholder.svg"}
+          src={post.image[0] || "/placeholder.svg"}
           alt={post.title}
           layout="fill"
           objectFit="cover"
