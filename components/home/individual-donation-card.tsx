@@ -28,8 +28,8 @@ export default function DonationPage({ post }: DonationPageProps) {
   function handleClick() {
     setIsDialogOpen(false)
     toast({
-      title: "Donation sent",
-      description: `Thank you for your generous donation ${post.author.name}.`,
+      title: "Donation has been sent!",
+      description: `Thank you for your generous donation ${post.author.name}. `,
       variant: "default",
       className: "bg-[#F7AB0A] text-black"
 
@@ -103,7 +103,7 @@ export default function DonationPage({ post }: DonationPageProps) {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-700">Amount to donate (Rs):</h4>
-                    <Input type="number" placeholder="Enter amount" required/>
+                    <Input type="number" placeholder="Enter amount" required />
                   </div>
                 </div>
               </CardContent>
