@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { FavouritesProvider } from "@/context/favourites-context";
+import { ToastProvider } from "@radix-ui/react-toast";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +31,7 @@ export default function RootLayout({
       <body className={cn(inter.className, "h-[100vh] bg-white")}>
         <FavouritesProvider>
           {children}
+        <Toaster/>
         </FavouritesProvider>
       </body>
     </html>
