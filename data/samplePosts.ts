@@ -20,7 +20,7 @@ export const samplePosts: Post[] = [
     author: {
       name: 'Umer Ali',
       location: 'Madurai, Tamilnadu',
-      avatar: '/assets/images/avatar2.png',
+      avatar: '/assets/images/avatar.png',
     },
     image: ['/assets/images/needy.webp'],
     title: 'Support our community center expansion',
@@ -34,7 +34,7 @@ export const samplePosts: Post[] = [
     author: {
       name: 'Umer Ali',
       location: 'Madurai, Tamilnadu',
-      avatar: '/assets/images/avatar2.png',
+      avatar: '/assets/images/avatar.png',
     },
     image: ['/assets/images/needy.webp'],
     title: 'Support our community center expansion',
