@@ -6,7 +6,13 @@ import { Button } from "@/components/ui/button";
 import { SideMenu } from "./SideMenu";
 import { useNavigation } from "@/context/navigation-context";
 
-export default function Navbar() {
+export interface NavbarProps {
+  showActionButtons?: boolean;
+  showSearchBar?: boolean;
+}
+
+
+export default function Navbar({ showActionButtons = true, showSearchBar = true }: NavbarProps) {
   const { activeTab, setActiveTab } = useNavigation();
 
   return (
@@ -17,13 +23,13 @@ export default function Navbar() {
           <img src="/assets/icons/Taqseem.svg" alt="logo" className="w-25 h-20" />
         </div>
 
-        <Button variant="ghost" size="icon" className="p-2">
+        {showSearchBar && <Button variant="ghost" size="icon" className="p-2">
           <Search className="w-5 h-5" />
-        </Button>
+        </Button>}
       </div>
 
       {/* Action buttons */}
-      <div className="flex px-4 pb-3 gap-4 overflow-x-auto justify-around">
+      {showActionButtons && <div className="flex px-4 pb-3 gap-4 overflow-x-auto justify-around">
         <Button
           className={`rounded-full px-6 ${activeTab === 'donate' ? 'bg-[#F7AB0A] hover:bg-[#F7AB0A]/80' : 'bg-black hover:bg-[#F7AB0A]/80'
             }`}
@@ -38,7 +44,7 @@ export default function Navbar() {
         >
           Volunteer
         </Button>
-      </div>
+      </div>}
     </header>
   );
 }
