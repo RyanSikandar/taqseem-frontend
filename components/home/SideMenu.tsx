@@ -14,6 +14,7 @@ import {
   faHeart,
   faHome,
   faArrowRightFromBracket,
+  faDonate
 } from "@fortawesome/free-solid-svg-icons";
 import { Menu } from 'lucide-react';
 
@@ -28,15 +29,23 @@ export function SideMenu() {
       <SheetContent side="left">
         <div>
           <Link href="/dashboard">
-          <div className="py-3">
-            <img src="/assets/icons/Taqseem.svg" alt="logo" className="w-25 h-20" />
-          </div>
+            <div className="py-3">
+              <img src="/assets/icons/Taqseem.svg" alt="logo" className="w-25 h-20" />
+            </div>
           </Link>
           <div className="py-3">
             <Link href="/dashboard">
               <div className="flex text-xl hover:underline decoration-[#F7AB0A]">
                 <FontAwesomeIcon icon={faHome} className="w-4 mr-4" />
                 <p>Home</p>
+              </div>
+            </Link>
+          </div>
+          <div className="py-3">
+            <Link href="/yourDonations">
+              <div className="flex text-xl hover:underline decoration-[#F7AB0A]">
+                <FontAwesomeIcon icon={faDonate} className="w-4 mr-4" />
+                <p>Your Donations</p>
               </div>
             </Link>
           </div>
@@ -54,6 +63,7 @@ export function SideMenu() {
               <p>Add a Donation</p>
             </Link>
           </div>
+
           <div className="py-3">
             <Link href="/favourite" className="flex text-xl hover:underline decoration-[#F7AB0A]">
               <FontAwesomeIcon icon={faHeart} className="w-4 mr-4" />
