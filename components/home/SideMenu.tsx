@@ -41,7 +41,7 @@ export function SideMenu() {
             </Link>
           </div>
           <div className="py-3">
-            <Link href="#">
+            <Link href="/profile">
               <div className="flex text-xl">
                 <FontAwesomeIcon icon={faUser} className="w-4 mr-4" />
                 <p>Profile</p>
