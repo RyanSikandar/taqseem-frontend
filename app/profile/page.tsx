@@ -24,7 +24,7 @@ export default function ProfilePage() {
     setEditMode(false)
   }
   return (
-    <div className="h-screen p-4 flex items-center justify-center">
+    <div className="h-screen p-4 flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md mx-auto ">
         <CardHeader className="flex flex-col items-center gap-4 pt-8 pb-6">
           <Avatar className="h-24 w-24">
@@ -41,19 +41,19 @@ export default function ProfilePage() {
         <Separator />
         <CardContent className="grid gap-4 p-6">
           <div className="grid gap-2">
-            <div className="text-sm font-medium text-muted-foreground">About</div>
+            <div className="text-sm font-medium text-black">About</div>
 
             <div className="text-sm text-muted-foreground">{formData.about}</div>
 
           </div>
           <div className="grid gap-2">
-            <div className="text-sm font-medium text-muted-foreground">Location</div>
+            <div className="text-sm font-medium text-black">Location</div>
 
             <div className="text-sm text-muted-foreground">{formData.location}</div>
 
           </div>
           <div className="grid gap-2">
-            <div className="text-sm font-medium text-muted-foreground">CNIC</div>
+            <div className="text-sm font-medium text-black">CNIC</div>
 
             <div className="text-sm text-muted-foreground">{formData.CNIC}</div>
 
@@ -61,11 +61,11 @@ export default function ProfilePage() {
         </CardContent>
         <CardFooter className="flex justify-end p-4">
           {editMode ? (
-            <Button variant="outline" onClick={handleSave}>
+            <Button variant="outline" onClick={handleSave} className="bg-black text-white hover:bg-[#F7AB0A] hover:text-white">
               Save
             </Button>
           ) : (
-            <Button variant="outline" onClick={handleEdit}>
+            <Button variant="outline" onClick={handleEdit} className="bg-black text-white hover:bg-[#F7AB0A] hover:text-white">
               Edit
             </Button>
           )}
