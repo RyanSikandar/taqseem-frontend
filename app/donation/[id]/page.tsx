@@ -19,6 +19,9 @@ const page = () => {
         currentAmount: 1000,
         targetAmount: 7000,
         daysLeft: 1,
+        IBAN: 'PK36SCBL0000001123456702',
+        BankName: 'Standard Chartered Bank',
+        AccountTitle: 'Rayan Sikandar'
     };
 
     return (
