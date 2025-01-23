@@ -31,7 +31,7 @@ export default function RootLayout({
       <body className={cn(inter.className, "h-[100vh] bg-white")}>
         <FavouritesProvider>
           {children}
-        <Toaster/>
+          <Toaster />
         </FavouritesProvider>
       </body>
     </html>
