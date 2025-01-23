@@ -64,7 +64,7 @@ export function DonationCard({ post, onDonate }: DonationCardProps) {
           <p className="text-xs text-muted-foreground line-clamp-2">{post.description}</p>
 
           <div className="space-y-2">
-            <Progress value={progressPercentage} className="h-2" />
+            <Progress value={progressPercentage} className="h-2 [&>*]:bg-[#F7AB0A]/80" />
             <div className="flex items-center justify-between text-xs">
               <div className="flex items-center gap-1">
                 <span className="font-semibold">Rs. {post.currentAmount}</span>
@@ -99,9 +99,10 @@ export function DonationCard({ post, onDonate }: DonationCardProps) {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={handleLike}>
-              <Heart className={`w-4 h-4 ${isLiked ? 'fill-red-500 stroke-red-500' : ''}`} />
-            </button>
+
+            <Button size="icon" variant="secondary" className="rounded-full bg-white" onClick={handleLike}>
+              <Heart className="h-4 w-4 text-[#F7AB0A]" fill={`${isLiked ? `#F7AB0A` : `white`} `} />
+            </Button>
             <button onClick={handleShare}>
               <Share2 className="w-4 h-4" />
             </button>

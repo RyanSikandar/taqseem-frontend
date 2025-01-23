@@ -55,7 +55,7 @@ export function SideMenu() {
             </Link>
           </div>
           <div className="py-3">
-            <Link href="#" className="flex text-xl hover:underline decoration-[#F7AB0A]">
+            <Link href="/favourite" className="flex text-xl hover:underline decoration-[#F7AB0A]">
               <FontAwesomeIcon icon={faHeart} className="w-4 mr-4" />
               <p>Favourite</p>
             </Link>
