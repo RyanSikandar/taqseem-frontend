@@ -6,7 +6,7 @@ export const sampleVolunteerPosts: Post[] = [
         author: {
             name: 'Sara Khan',
             location: 'Karachi, Pakistan',
-            avatar: '/assets/images/avatar3.png',
+            avatar: '/assets/images/avatar.png',
         },
         image:[ '/assets/images/volunteer.webp'],
         title: 'Join us for a beach cleanup',
@@ -20,7 +20,7 @@ export const sampleVolunteerPosts: Post[] = [
         author: {
             name: 'Ali Raza',
             location: 'Lahore, Pakistan',
-            avatar: '/assets/images/avatar4.png',
+            avatar: '/assets/images/avatar.png',
         },
         image: ['/assets/images/volunteer.webp'],
         title: 'Teach English to underprivileged children',
@@ -34,7 +34,7 @@ export const sampleVolunteerPosts: Post[] = [
         author: {
             name: 'Fatima Noor',
             location: 'Islamabad, Pakistan',
-            avatar: '/assets/images/avatar5.png',
+            avatar: '/assets/images/avatar.png',
         },
         image: ['/assets/images/volunteer.webp'],
         title: 'Help at the local animal shelter',
