@@ -34,7 +34,7 @@ export function SideMenu() {
           </Link>
           <div className="py-3">
             <Link href="/dashboard">
-              <div className="flex text-xl">
+              <div className="flex text-xl hover:underline decoration-[#F7AB0A]">
                 <FontAwesomeIcon icon={faHome} className="w-4 mr-4" />
                 <p>Home</p>
               </div>
@@ -42,27 +42,27 @@ export function SideMenu() {
           </div>
           <div className="py-3">
             <Link href="/profile">
-              <div className="flex text-xl">
+              <div className="flex text-xl hover:underline decoration-[#F7AB0A]">
                 <FontAwesomeIcon icon={faUser} className="w-4 mr-4" />
                 <p>Profile</p>
               </div>
             </Link>
           </div>
           <div className="py-3">
-            <Link href="/add-donation" className="flex text-xl">
+            <Link href="/add-donation" className="flex text-xl hover:underline decoration-[#F7AB0A]">
               <FontAwesomeIcon icon={faPeopleRoof} className="w-4 mr-4" />
               <p>Add a Donation</p>
             </Link>
           </div>
           <div className="py-3">
-            <Link href="#" className="flex text-xl">
+            <Link href="#" className="flex text-xl hover:underline decoration-[#F7AB0A]">
               <FontAwesomeIcon icon={faHeart} className="w-4 mr-4" />
               <p>Favourite</p>
             </Link>
           </div>
         </div>
         <SheetFooter>
-          <Button className="mt-5">
+          <Button className="mt-5 bg-black text-white hover:bg-[#F7AB0A] hover:text-white">
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
               className="w-4 mr-4"
