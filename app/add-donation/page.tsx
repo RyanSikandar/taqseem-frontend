@@ -15,6 +15,10 @@ interface FormData {
     cause: string
     amount: number
     days: number
+    IBAN: string
+    accountTitle: string
+    bankName: string
+    donationUse: string
 }
 
 export default function RaiseCause() {
@@ -73,7 +77,7 @@ export default function RaiseCause() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6">
+        <div className="min-h-screen bg-gray-50 p-10 mt-10">
             <div className="max-w-4xl mx-auto">
                 <Card className="p-6">
                     <h1 className="text-2xl font-bold mb-6">Raise a Cause</h1>
@@ -95,7 +99,7 @@ export default function RaiseCause() {
                             />
                             <label htmlFor="images" className="cursor-pointer">
                                 <Upload className="w-12 h-12 mx-auto mb-2 text-gray-400" />
-                                <p className="text-sm text-gray-500">Drag and drop your images here, or click to select files</p>
+                                <p className="text-sm text-gray-500">Drag and drop your cause images/documents here, or click to select files</p>
                             </label>
                         </div>
 
@@ -144,7 +148,7 @@ export default function RaiseCause() {
                             </label>
                             <Textarea
                                 id="description"
-                                placeholder="Write detailed description about the topic to chosen"
+                                placeholder="Write detailed description about the cause"
                                 className="min-h-[150px]"
                                 {...register("description", { required: true })}
                             />
@@ -170,6 +174,52 @@ export default function RaiseCause() {
                             </Select>
                             {errors.cause && <p className="text-sm text-red-500">{errors.cause.message}</p>}
 
+                        </div>
+                        {/* Description Input */}
+                        <div className="space-y-2">
+                            <label htmlFor="donationUse" className="text-sm font-medium">
+                                How the donation will be used
+                            </label>
+                            <Textarea
+                                id="donationUse"
+                                placeholder="Write detailed explanation about how the donation will be used"
+                                className="min-h-[150px]"
+                                {...register("donationUse", { required: true })}
+                            />
+                            {errors.donationUse && <p className="text-sm text-red-500">Usage is required</p>}
+                        </div>
+                        <div className="space-y-2">
+                            <label htmlFor="IBAN" className="text-sm font-medium">
+                                IBAN Number (Receiving Account)
+                            </label>
+                            <Input
+                                id="IBAN"
+                                placeholder="eg: PK06SCBL0000001123456702"
+                                {...register("IBAN", { required: true })}
+                            />
+                            {errors.IBAN && <p className="text-sm text-red-500">IBAN is required</p>}
+                        </div>
+                        <div className="space-y-2">
+                            <label htmlFor="accountTitle" className="text-sm font-medium">
+                                Account Title (Receiving Account)
+                            </label>
+                            <Input
+                                id="accountTitle"
+                                placeholder="eg: Rayan Sikandar"
+                                {...register("accountTitle", { required: true })}
+                            />
+                            {errors.accountTitle && <p className="text-sm text-red-500">Account title is required</p>}
+                        </div>
+                        <div className="space-y-2">
+                            <label htmlFor="bankName" className="text-sm font-medium">
+                                Bank Name (Receiving Account)
+                            </label>
+                            <Input
+                                id="bankName"
+                                placeholder="eg: Bank Alfalah"
+                                {...register("bankName", { required: true })}
+                            />
+                            {errors.bankName && <p className="text-sm text-red-500">Bank Name is required</p>}
                         </div>
                         <div className="space-y-2">
                             <label htmlFor="amount" className="text-sm font-medium">
