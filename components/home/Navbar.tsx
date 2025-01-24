@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from "react";
-import React, { useState, useEffect } from "react";
 import { Search } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { SideMenu } from "./SideMenu";
