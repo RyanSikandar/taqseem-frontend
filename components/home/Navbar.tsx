@@ -13,7 +13,7 @@ export interface NavbarProps {
 
 
 export default function Navbar({ showActionButtons = true, showSearchBar = true }: NavbarProps) {
-  const {button , toggle} = useNavbarStore();
+  const { button, toggle } = useNavbarStore();
   return (
     <header className="fixed top-0 left-0 right-0 bg-white border-b z-50 opacity-100 ">
       <div className="flex items-center justify-between px-4 h-14">
