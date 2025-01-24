@@ -31,18 +31,14 @@ export default function Navbar({ showActionButtons = true, showSearchBar = true 
       {showActionButtons && <div className="flex px-4 pb-3 gap-4 overflow-x-auto justify-around">
         <Button
           className={`rounded-full px-6 ${button === 'donate' ? 'bg-[#F7AB0A] hover:bg-[#F7AB0A]/80' : 'bg-black hover:bg-[#F7AB0A]/80'
-          className={`rounded-full px-6 ${button === 'donate' ? 'bg-[#F7AB0A] hover:bg-[#F7AB0A]/80' : 'bg-black hover:bg-[#F7AB0A]/80'
             }`}
-          onClick={() => toggle('donate')}
           onClick={() => toggle('donate')}
         >
           Donate
         </Button>
         <Button
           className={`rounded-full px-6 ${button === 'volunteer' ? 'bg-[#F7AB0A] hover:bg-[#F7AB0A]/80' : 'bg-black hover:bg-[#F7AB0A]/80'
-          className={`rounded-full px-6 ${button === 'volunteer' ? 'bg-[#F7AB0A] hover:bg-[#F7AB0A]/80' : 'bg-black hover:bg-[#F7AB0A]/80'
             }`}
-          onClick={() => toggle('volunteer')}
           onClick={() => toggle('volunteer')}
         >
           Volunteer
