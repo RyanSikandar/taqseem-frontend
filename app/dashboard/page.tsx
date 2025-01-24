@@ -1,16 +1,26 @@
 'use client'
 
-import { useState } from 'react'
-import { Header } from '@/components/ui/header'
+import { useState, useEffect } from 'react'
 import { DonationCard } from '@/components/home/donation-card'
-import type { Post } from '@/types/post'
 import { samplePosts } from '@/data/samplePosts'
-import { useNavigation } from '@/context/navigation-context'
 import { sampleVolunteerPosts } from '@/data/sampleVolunteers'
 import { VolunteerCard } from '@/components/home/volunteer-card'
+import useNavbarStore from '@/store/useNavbarStore'
 
 export default function Page() {
-  const { activeTab } = useNavigation();
+  const { button, isHydrated } = useNavbarStore();
+
+  // check consistency when actual data returned by api calls is used from here
+  const [hydrationComplete, setHydrationComplete] = useState(false);
+
+  useEffect(() => {
+    setHydrationComplete(isHydrated());
+  }, [isHydrated]);
+
+  if (!hydrationComplete) {
+    return null;
+  }
+  // till here because in that case a loading icon would be used during loading time
 
   const handleDonate = (id: string) => {
     // Handle donation
@@ -18,7 +28,7 @@ export default function Page() {
   }
   const handleVolunteer = (id: string) => {
     console.log(id)
-    // Handle
+    // Handle volunteer
   }
 
   return (
@@ -27,7 +37,7 @@ export default function Page() {
         <div className="py-8 sm:py-12">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {
-              activeTab === 'donate' ?
+              button === 'donate' ?
 
                 (samplePosts.map(post => (
                   <div key={post.id} className="flex">

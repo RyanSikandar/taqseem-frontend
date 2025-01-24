@@ -1,10 +1,10 @@
 'use client'
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { SideMenu } from "./SideMenu";
-import { useNavigation } from "@/context/navigation-context";
+import useNavbarStore from '@/store/useNavbarStore';
 
 export interface NavbarProps {
   showActionButtons?: boolean;
@@ -13,8 +13,7 @@ export interface NavbarProps {
 
 
 export default function Navbar({ showActionButtons = true, showSearchBar = true }: NavbarProps) {
-  const { activeTab, setActiveTab } = useNavigation();
-
+  const {button , toggle} = useNavbarStore();
   return (
     <header className="fixed top-0 left-0 right-0 bg-white border-b z-50 opacity-100 ">
       <div className="flex items-center justify-between px-4 h-14">
@@ -27,20 +26,19 @@ export default function Navbar({ showActionButtons = true, showSearchBar = true 
           <Search className="w-5 h-5" />
         </Button>}
       </div>
-
       {/* Action buttons */}
       {showActionButtons && <div className="flex px-4 pb-3 gap-4 overflow-x-auto justify-around">
         <Button
-          className={`rounded-full px-6 ${activeTab === 'donate' ? 'bg-[#F7AB0A] hover:bg-[#F7AB0A]/80' : 'bg-black hover:bg-[#F7AB0A]/80'
+          className={`rounded-full px-6 ${button === 'donate' ? 'bg-[#F7AB0A] hover:bg-[#F7AB0A]/80' : 'bg-black hover:bg-[#F7AB0A]/80'
             }`}
-          onClick={() => setActiveTab('donate')}
+          onClick={() => toggle('donate')}
         >
           Donate
         </Button>
         <Button
-          className={`rounded-full px-6 ${activeTab === 'volunteer' ? 'bg-[#F7AB0A] hover:bg-[#F7AB0A]/80' : 'bg-black hover:bg-[#F7AB0A]/80'
+          className={`rounded-full px-6 ${button === 'volunteer' ? 'bg-[#F7AB0A] hover:bg-[#F7AB0A]/80' : 'bg-black hover:bg-[#F7AB0A]/80'
             }`}
-          onClick={() => setActiveTab('volunteer')}
+          onClick={() => toggle('volunteer')}
         >
           Volunteer
         </Button>
