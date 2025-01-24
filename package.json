@@ -31,6 +31,7 @@
     "idb": "^8.0.1",
     "lucide-react": "^0.372.0",
     "next": "14.2.2",
+    "next-auth": "^4.24.11",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.3",

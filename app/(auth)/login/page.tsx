@@ -11,6 +11,8 @@ import { Cursor, useTypewriter } from "react-simple-typewriter"
 import { FaApple, FaGoogle } from "react-icons/fa"
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import Link from "next/link"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
 const Login = () => {
   const [text] = useTypewriter({
@@ -18,6 +20,7 @@ const Login = () => {
     loop: true,
     delaySpeed: 2000,
   })
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -29,9 +32,23 @@ const Login = () => {
 
   const isLoading = form.formState.isSubmitting
 
-  const handleSubmit = async (values: z.infer<typeof loginSchema>) => {
-    console.log(values)
+  const handleGoogleSignIn = () => {
+    signIn("google", { callbackUrl: "/dashboard" })
   }
+
+  const handleSubmit = async (values: z.infer<typeof loginSchema>) => {
+    const result = await signIn("credentials", {
+      ...values,
+      redirect: false
+    })
+
+    if (result?.error) {
+      console.error(result.error)
+    } else {
+      router.push("/dashboard")
+    }
+  }
+
 
   return (
     <div className="flex h-screen w-full items-center justify-center px-4">
@@ -105,20 +122,12 @@ const Login = () => {
               <Button
                 variant="default"
                 size="sm"
-                className="w-full rounded-[6px] bg-black px-4 py-2 text-sm font-medium text-white transition-all hover:bg-black/90 sm:py-3 sm:text-base"
+                className="w-full rounded-[6px] border-2 border-[#F7AB0A] bg-white px-4 py-2 text-sm font-medium text-[#F7AB0A] transition-all duration-300 ease-in-out hover:bg-[#F7AB0A]/80 hover:text-white sm:py-3 sm:text-base"
                 type="submit"
               >
                 {isLoading ? "Loading..." : "Log In"}
               </Button>
 
-              <Button
-                variant="default"
-                size="sm"
-                className="w-full rounded-[6px] border-2 border-[#F7AB0A] bg-white px-4 py-2 text-sm font-medium text-[#F7AB0A] transition-all duration-300 ease-in-out hover:bg-[#F7AB0A]/80 hover:text-white sm:py-3 sm:text-base"
-                type="submit"
-              >
-                {isLoading ? "Loading..." : "Continue as Donor"}
-              </Button>
             </div>
           </form>
 
@@ -134,31 +143,13 @@ const Login = () => {
               size="sm"
               className="w-full rounded-[6px] border-2 border-black bg-white px-4 py-2 text-xs text-black transition-all hover:bg-black hover:text-white sm:py-3 sm:text-sm"
               type="submit"
+              onClick={handleGoogleSignIn}
             >
-              {isLoading ? (
-                "Loading..."
-              ) : (
-                <div className="flex items-center justify-center">
-                  Continue with
-                  <FaGoogle className="ml-2" size={16} />
-                </div>
-              )}
-            </Button>
 
-            <Button
-              variant="default"
-              size="sm"
-              className="w-full rounded-[6px] border-2 border-black bg-white px-4 py-2 text-xs text-black transition-all hover:bg-black hover:text-white sm:py-3 sm:text-sm"
-              type="submit"
-            >
-              {isLoading ? (
-                "Loading..."
-              ) : (
-                <div className="flex items-center justify-center">
-                  Continue with
-                  <FaApple className="ml-2" size={18} />
-                </div>
-              )}
+              <div className="flex items-center justify-center">
+                Continue with
+                <FaGoogle className="ml-2" size={16} />
+              </div>
             </Button>
           </div>
         </Form>

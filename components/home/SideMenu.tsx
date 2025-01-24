@@ -17,6 +17,7 @@ import {
   faDonate
 } from "@fortawesome/free-solid-svg-icons";
 import { Menu } from 'lucide-react';
+import { signOut } from "next-auth/react";
 
 export function SideMenu() {
   return (
@@ -72,7 +73,7 @@ export function SideMenu() {
           </div>
         </div>
         <SheetFooter>
-          <Button className="mt-5 bg-black text-white hover:bg-[#F7AB0A] hover:text-white">
+          <Button className="mt-5 bg-black text-white hover:bg-[#F7AB0A] hover:text-white" onClick={() => signOut({ callbackUrl: "/" })}>
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
               className="w-4 mr-4"
