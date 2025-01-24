@@ -1,5 +1,5 @@
 'use client'
-import { DonationCard } from '@/components/home/donation-card';
+
 import DonationPage from '@/components/home/individual-donation-card';
 import { useParams } from 'next/navigation'
 import React from 'react'
