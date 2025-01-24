@@ -18,7 +18,7 @@ import {
 import { Post } from "@/types";
 import { useState } from "react";
 
-export interface DonationPageProps {
+export interface VolunteerPageProps {
   post: Post;
 }
 
@@ -32,49 +32,43 @@ const donorsData = [
   {
     name: "Ali Raza",
     location: "Islamabad, Pakistan",
-    amount: "Rs 100",
     message: "I just love what your doing for the kids..good luck sir",
     time: "2 days ago",
   },
   {
     name: "Ali Raza",
     location: "Islamabad, Pakistan",
-    amount: "Rs 100",
     message: "I just love what your doing for the kids..good luck sir",
     time: "2 days ago",
   },
   {
     name: "Ali Raza",
     location: "Islamabad, Pakistan",
-    amount: "Rs 100",
     message: "I just love what your doing for the kids..good luck sir",
     time: "2 days ago",
   },
   {
     name: "Ali Raza",
     location: "Islamabad, Pakistan",
-    amount: "Rs 100",
     message: "I just love what your doing for the kids..good luck sir",
     time: "2 days ago",
   },
   {
     name: "Qasim Ahmed",
     location: "Rawalpindi, Pakistan",
-    amount: "Rs 100",
     time: "2 days ago",
   },
 ];
 
-export default function DonationPage({ post }: DonationPageProps) {
+export default function VolunteerPage({ post }: VolunteerPageProps) {
   const [donorsDat, setDonorsDat] = useState(donorsData);
   const [showAllDonors, setShowAllDonors] = useState(false);
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-6xl mx-auto p-6">
         <div className="flex items-center gap-4 mb-4 justify-center">
-          <h1 className="text-2xl font-semibold">Donation</h1>
+          <h1 className="text-2xl font-semibold">Volunteer</h1>
         </div>
-
         <div className="grid lg:grid-cols-2 gap-8">
           <div>
             <Card>
@@ -103,38 +97,12 @@ export default function DonationPage({ post }: DonationPageProps) {
                 <h2 className="text-2xl font-bold">{post.title}</h2>
                 <p className="text-gray-500">{post.description}</p>
               </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-3 gap-4">
-                  <Card>
-                    <CardContent className="p-4 text-center">
-                      <div className="text-2xl font-bold">
-                        Rs. {post.currentAmount}
-                      </div>
-                      <div className="text-sm text-gray-500">Raised</div>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-4 text-center">
-                      <div className="text-2xl font-bold">
-                        Rs. {post.targetAmount}
-                      </div>
-                      <div className="text-sm text-gray-500">Goal</div>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-4 text-center">
-                      <div className="text-2xl font-bold">{post.daysLeft}</div>
-                      <div className="text-sm text-gray-500">days</div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CardContent>
               <CardFooter>
                 <Button
                   className="w-full bg-black hover:bg-[#F7AB0A]"
                   size="lg"
                 >
-                  Send Donation
+                  Volunteer Now
                 </Button>
               </CardFooter>
             </Card>
@@ -144,7 +112,7 @@ export default function DonationPage({ post }: DonationPageProps) {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-semibold">Raised by</h3>
+                  <h3 className="text-xl font-semibold">Requested by</h3>
                   <a href="#" className="text-primary">
                     <MessageSquare />
                   </a>
@@ -173,7 +141,7 @@ export default function DonationPage({ post }: DonationPageProps) {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-semibold">Top Donaters</h3>
+                  <h3 className="text-xl font-semibold">Top Volunteers</h3>
                   <Button
                     variant="ghost"
                     className="text-primary"
@@ -206,9 +174,6 @@ export default function DonationPage({ post }: DonationPageProps) {
                               </p>
                             </div>
                             <div className="text-right">
-                              <div className="font-semibold">
-                                {donor.amount}
-                              </div>
                               <div className="text-sm text-gray-500">
                                 {donor.time}
                               </div>
@@ -223,7 +188,7 @@ export default function DonationPage({ post }: DonationPageProps) {
                         </div>
                       </div>
                     ))
-                  : donorsDat.slice(0, 3).map((donor, index) => (
+                  : donorsDat.slice(0, 2).map((donor, index) => (
                       <div
                         key={index}
                         className="flex items-start gap-4 p-4 rounded-lg border"
@@ -243,9 +208,6 @@ export default function DonationPage({ post }: DonationPageProps) {
                               </p>
                             </div>
                             <div className="text-right">
-                              <div className="font-semibold">
-                                {donor.amount}
-                              </div>
                               <div className="text-sm text-gray-500">
                                 {donor.time}
                               </div>

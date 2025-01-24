@@ -1,6 +1,6 @@
 "use client";
-import { DonationCard } from "@/components/home/donation-card";
-import DonationPage from "@/components/home/individual-donation-card";
+
+import VolunteerPage from "@/components/home/individual-volunteer-card";
 import { useParams } from "next/navigation";
 import React from "react";
 
@@ -22,7 +22,7 @@ const page = () => {
     daysLeft: 10,
   };
 
-  return <DonationPage post={samplePost} />;
+  return <VolunteerPage post={samplePost} />;
 };
 
 export default page;
