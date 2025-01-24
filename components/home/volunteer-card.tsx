@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import type { Post } from '@/types/post'
+import { useRouter } from 'next/navigation'
 
 interface VolunteerCardProps {
   post: Post;
@@ -15,6 +16,7 @@ interface VolunteerCardProps {
 
 export function VolunteerCard({ post, onVolunteer }: VolunteerCardProps) {
   const [isLiked, setIsLiked] = useState(false)
+  const router = useRouter();
 
   const handleLike = () => {
     setIsLiked(!isLiked)
@@ -65,7 +67,9 @@ export function VolunteerCard({ post, onVolunteer }: VolunteerCardProps) {
         </div>
         <Button
           className="w-full bg-black hover:bg-[#F7AB0A] text-sm py-1"
-          onClick={onVolunteer}
+          onClick={() => {
+            router.push(`/volunteer/${post.id}`)
+          }}
         >
           Volunteer
         </Button>
