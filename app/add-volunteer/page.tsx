@@ -27,7 +27,7 @@ interface FormData {
   donationUse: string;
 }
 
-export default function RaiseCause() {
+export default function RequestVolunteer() {
   const [images, setImages] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
 
@@ -86,7 +86,7 @@ export default function RaiseCause() {
     <div className="min-h-screen bg-gray-50 p-10 mt-10">
       <div className="max-w-4xl mx-auto">
         <Card className="p-6">
-          <h1 className="text-2xl font-bold mb-6">Raise Cause</h1>
+          <h1 className="text-2xl font-bold mb-6">Raquest Volunteer</h1>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Image Upload Area */}
@@ -144,7 +144,7 @@ export default function RaiseCause() {
               </label>
               <Input
                 id="topic"
-                placeholder="e.g., need donation for school renovation"
+                placeholder="e.g., teach maths to underprivileged children"
                 {...register("topic", { required: true })}
               />
               {errors.topic && (
@@ -198,11 +198,11 @@ export default function RaiseCause() {
             {/* Description Input */}
             <div className="space-y-2">
               <label htmlFor="donationUse" className="text-sm font-medium">
-                How the donation will be used
+                How it will help the community
               </label>
               <Textarea
                 id="donationUse"
-                placeholder="Write detailed explanation about how the donation will be used"
+                placeholder="Write detailed explanation about how it will help the community"
                 className="min-h-[150px]"
                 {...register("donationUse", { required: true })}
               />
@@ -210,65 +210,6 @@ export default function RaiseCause() {
                 <p className="text-sm text-red-500">Usage is required</p>
               )}
             </div>
-            <div className="space-y-2">
-              <label htmlFor="IBAN" className="text-sm font-medium">
-                IBAN Number (Receiving Account)
-              </label>
-              <Input
-                id="IBAN"
-                placeholder="e.g., PK06SCBL0000001123456702"
-                {...register("IBAN", { required: true })}
-              />
-              {errors.IBAN && (
-                <p className="text-sm text-red-500">IBAN is required</p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="accountTitle" className="text-sm font-medium">
-                Account Title (Receiving Account)
-              </label>
-              <Input
-                id="accountTitle"
-                placeholder="e.g., Rayan Sikandar"
-                {...register("accountTitle", { required: true })}
-              />
-              {errors.accountTitle && (
-                <p className="text-sm text-red-500">
-                  Account title is required
-                </p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="bankName" className="text-sm font-medium">
-                Bank Name (Receiving Account)
-              </label>
-              <Input
-                id="bankName"
-                placeholder="e.g., Bank Alfalah"
-                {...register("bankName", { required: true })}
-              />
-              {errors.bankName && (
-                <p className="text-sm text-red-500">Bank Name is required</p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="amount" className="text-sm font-medium">
-                Amount Needed
-              </label>
-              <div className="flex items-center space-x-2">
-                <p className="text-sm font-medium">Rs. </p>
-                <Input
-                  type="number"
-                  {...register("amount", { required: true })}
-                  id="amount"
-                  placeholder="7000"
-                />
-              </div>
-              {errors.amount && (
-                <p className="text-sm text-red-500">Amount is required</p>
-              )}
-            </div>
-
             <div className="space-y-2">
               <label htmlFor="amount" className="text-sm font-medium">
                 Days Left
