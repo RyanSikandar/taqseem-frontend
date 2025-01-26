@@ -40,9 +40,7 @@ export function DonationCard({ post, onDonate }: DonationCardProps) {
       }
     }
   }
-
-
-
+  
   // Calculate the progress percentage
   const progressPercentage = (post.currentAmount / post.targetAmount) * 100
 

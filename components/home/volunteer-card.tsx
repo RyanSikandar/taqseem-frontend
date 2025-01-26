@@ -55,7 +55,7 @@ export function VolunteerCard({ post, onVolunteer }: VolunteerCardProps) {
           <p className="text-xs text-muted-foreground line-clamp-2">{post.description}</p>
 
           <div className="space-y-2">
-            <Progress value={progressPercentage} className="h-2" />
+            <Progress value={progressPercentage} className="h-2 [&>*]:bg-[#F7AB0A]/80" />
             <div className="flex items-center justify-between text-xs">
               <div className="flex items-center gap-1">
                 <span className="font-semibold">{post.currentAmount}</span>
@@ -90,9 +90,6 @@ export function VolunteerCard({ post, onVolunteer }: VolunteerCardProps) {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={handleLike}>
-              <Heart className={`w-4 h-4 ${isLiked ? 'fill-red-500 stroke-red-500' : ''}`} />
-            </button>
             <button onClick={handleShare}>
               <Share2 className="w-4 h-4" />
             </button>

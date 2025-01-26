@@ -42,7 +42,6 @@ export default function DonationPage({ post }: DonationPageProps) {
         <div className="flex items-center gap-4 mb-4 justify-center">
           <h1 className="text-3xl font-semibold">Donation</h1>
         </div>
-
         <div className="grid lg:grid-cols-2 gap-8">
           <div>
             <Card>
