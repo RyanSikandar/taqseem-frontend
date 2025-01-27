@@ -43,7 +43,7 @@ export function SideMenu() {
             </Link>
           </div>
           <div className="py-3">
-            <Link href="/yourDonations">
+            <Link href="/your-donations">
               <div className="flex text-xl hover:underline decoration-[#F7AB0A]">
                 <FontAwesomeIcon icon={faDonate} className="w-4 mr-4" />
                 <p>Your Donations</p>
@@ -51,7 +51,7 @@ export function SideMenu() {
             </Link>
           </div>
           <div className="py-3">
-            <Link href="/yourVolunteers" className="flex text-xl hover:underline decoration-[#F7AB0A]">
+            <Link href="/your-volunteers" className="flex text-xl hover:underline decoration-[#F7AB0A]">
               <FontAwesomeIcon icon={faHandshakeSimple} className="w-4 mr-4" />
               <p>Your Volunteers</p>
             </Link>

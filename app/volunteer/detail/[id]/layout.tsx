@@ -2,7 +2,7 @@ import Navbar from "@/components/home/Navbar";
 import { SideMenu } from "@/components/home/SideMenu";
 import { NavigationProvider } from "@/context/navigation-context";
 
-const donationPageLayout = ({ children }: { children: React.ReactNode }) => {
+const volunteerPageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <NavigationProvider>
@@ -15,4 +15,4 @@ const donationPageLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default donationPageLayout;
+export default volunteerPageLayout;
