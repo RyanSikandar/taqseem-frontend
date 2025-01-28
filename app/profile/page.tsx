@@ -43,7 +43,7 @@ export default function ProfilePage() {
       <Card className="w-full max-w-md mx-auto ">
         <CardHeader className="flex flex-col items-center gap-4 pt-8 pb-6">
           <Avatar className="h-24 w-24">
-            <AvatarImage src="/placeholder-user.jpg" alt="@shadcn" />
+            <AvatarImage src={`${formData.image}`} alt="@shadcn" />
             <AvatarFallback>JD</AvatarFallback>
           </Avatar>
           <div className="grid gap-1 text-center">
