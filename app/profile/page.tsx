@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
@@ -9,25 +9,35 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
+import { ProfileData } from "@/types/profileData";
 
 export default function ProfilePage() {
-  const [editMode, setEditMode] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ProfileData>({
     name: "John Doe",
-    email: "john@example.com",
-    about:
-      "I'm a software engineer with a passion for building great products. I enjoy working on challenging problems and collaborating with talented teams.",
-    location: "San Francisco, CA",
-    gender: "Male",
-    CNIC: "12306-9765415-5",
+    email: "",
+    image: "",
+    description: "",
+    cnic: 0,
+    location: "",
   });
-  const handleEdit = () => {
-    setEditMode(true);
-  };
-  const handleSave = () => {
-    setEditMode(false);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/user`, {
+        method: 'GET',
+        cache: 'no-store',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      if (!res.ok) {
+        throw new Error("Failed to fetch data")
+      }
+      const data = await res.json()
+      setFormData(data)
+    }
+    fetchData()
+  },[])
   return (
     <div className="h-screen p-4 flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md mx-auto ">
@@ -48,7 +58,7 @@ export default function ProfilePage() {
           <div className="grid gap-2">
             <div className="text-sm font-medium text-black">About</div>
             <div className="text-sm text-muted-foreground">
-              {formData.about}
+              {formData.description}
             </div>
           </div>
           <div className="grid gap-2">
@@ -59,7 +69,7 @@ export default function ProfilePage() {
           </div>
           <div className="grid gap-2">
             <div className="text-sm font-medium text-black">CNIC</div>
-            <div className="text-sm text-muted-foreground">{formData.CNIC}</div>
+            <div className="text-sm text-muted-foreground">{formData.cnic}</div>
           </div>
         </CardContent>
       </Card>
