@@ -1,32 +1,50 @@
-'use client'
+'use server'
 
-import DonationPage from '@/components/home/individual-donation-card';
-import { useParams } from 'next/navigation'
-import React from 'react'
+import { Suspense } from "react"
+import DonationPage from "@/components/home/individual-donation-card"
 
-const page = () => {
-    const { id } = useParams();
-    const samplePost = {
-        id: '1',
-        author: {
-            name: 'Rayan Sikandar',
-            location: 'Islamabad, Pakistan',
-            avatar: '/assets/images/avatar.png',
+// Fetch donation data
+async function getDonation(id: string) {
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+    if (!backendUrl) {
+        throw new Error("Backend URL is not defined");
+    }
+
+    const res = await fetch(`${backendUrl}/api/donation/${id}`, {
+        method: 'GET',
+        cache: 'no-store',
+        headers: {
+            'Content-Type': 'application/json',
         },
-        image: ['/assets/images/needy.webp', '/assets/images/needy.webp', '/assets/images/needy.webp'],
-        title: 'Need donation for school renovation',
-        description: 'With your help, we aim to create a modern and comfortable learning environment that fosters creativity, innovation, and excellence in education. The impact of your contribution will extend beyond the walls of our school.',
-        currentAmount: 1000,
-        targetAmount: 7000,
-        daysLeft: 1,
-        IBAN: 'PK36SCBL0000001123456702',
-        BankName: 'Standard Chartered Bank',
-        AccountTitle: 'Rayan Sikandar'
-    };
+        credentials: "include"
+    });
 
-    return (
-        <DonationPage post={samplePost} />
-    )
+    if (!res.ok) {
+        throw new Error(`Failed to fetch data for ID: ${id}`);
+    }
+
+    const data = await res.json();
+    console.log(data);
+    return data.singleDonation;
 }
 
-export default page
+export default async function Page({ params }: { params: { id: string } }) {
+    if (!params?.id) {
+        return <div>Invalid ID</div>;
+    }
+
+    let donation;
+
+    try {
+        donation = await getDonation(params.id);
+    } catch (error: any) {
+        return <div>{error.message}</div>;
+    }
+
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <DonationPage post={donation} />
+        </Suspense>
+    );
+}
