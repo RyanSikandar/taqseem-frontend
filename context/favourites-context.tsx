@@ -1,11 +1,12 @@
 'use client'
-import { Donation, Post } from "@/types";
+import { Post } from "@/types";
 import { createContext, useContext, useEffect, useState } from "react";
 import { openDB, type IDBPDatabase } from 'idb';
+import { set } from "zod";
 
 interface FavouriteContextType {
-    favourites: Donation[];
-    toggleFavourite: (post: Donation) => void;
+    favourites: Post[];
+    toggleFavourite: (post: Post) => void;
     isLoading: boolean;
 }
 
@@ -18,14 +19,14 @@ const STORE_NAME = 'posts';
 const initDB = async () => {
     const db = await openDB(DB_NAME, DB_VERSION, {
         upgrade(database) {
-            database.createObjectStore(STORE_NAME, { keyPath: '_id' });
+            database.createObjectStore(STORE_NAME, { keyPath: 'id' });
         },
     });
     return db;
 }
 
 export function FavouritesProvider({ children }: { children: React.ReactNode }) {
-    const [favourites, setFavourites] = useState<Donation[]>([]);
+    const [favourites, setFavourites] = useState<Post[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [db, setDb] = useState<IDBPDatabase | null>(null);
 
@@ -59,17 +60,17 @@ export function FavouritesProvider({ children }: { children: React.ReactNode }) 
 
     }, [])
 
-    const toggleFavourite = async (post: Donation) => {
+    const toggleFavourite = async (post: Post) => {
         if (!db) {
             return;
         }
 
         try {
-            const existingPost = await db.get(STORE_NAME, post._id);
+            const existingPost = await db.get(STORE_NAME, post.id);
             console.log('existingPost', existingPost);
             if (existingPost) {
-                await db.delete(STORE_NAME, post._id);
-                setFavourites(favourites.filter(fav => fav._id !== post._id));
+                await db.delete(STORE_NAME, post.id);
+                setFavourites(favourites.filter(fav => fav.id !== post.id));
             } else {
                 await db.add(STORE_NAME, post);
                 setFavourites([...favourites, post]);

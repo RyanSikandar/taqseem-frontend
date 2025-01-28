@@ -30,7 +30,7 @@ export default function FavoriteDonations() {
                             </div>
                         )
                         : (favourites.map((donation) => (
-                            <Card key={donation._id} className="overflow-hidden">
+                            <Card key={donation.id} className="overflow-hidden">
                                 <CardHeader className="p-0">
                                     <div className="relative h-48 w-full">
                                         <img
@@ -59,7 +59,7 @@ export default function FavoriteDonations() {
                                         <Calendar className="h-4 w-4 mr-1" />
                                         <span>{donation.daysLeft} days left</span>
                                     </div>
-                                    <Button className="bg-black hover:bg-[#F7AB0A] text-white" onClick={() => router.push(`/donation/${donation._id}`)}>Donate Now</Button>
+                                    <Button className="bg-black hover:bg-[#F7AB0A] text-white" onClick={() => router.push(`/donation/${donation.id}`)}>Donate Now</Button>
                                 </CardFooter>
                             </Card>
                         )))}
