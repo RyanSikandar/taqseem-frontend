@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from "react"
 import Image from "next/image"
 import { MessageSquare } from "lucide-react"
@@ -160,8 +161,7 @@ export default function DonationPage({ post }: DonationPageProps) {
               <CardContent className="space-y-4">
                 <div className="flex items-start gap-4 p-4 rounded-lg border">
                   <Avatar>
-                    <AvatarImage src={`/placeholder.svg?height=40&width=40`} />
-                    <AvatarFallback>{post.author.avatar}</AvatarFallback>
+                    <AvatarImage src={`${post.author.image}`} />
                   </Avatar>
                   <div className="flex-1 space-y-1">
                     <div className="flex items-start justify-between">
@@ -174,19 +174,23 @@ export default function DonationPage({ post }: DonationPageProps) {
                 </div>
               </CardContent>
             </Card>
-
+            <Card>
+              <CardHeader>
+                <h3 className="text-xl font-semibold">Donation Cause</h3>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700">
+                {post.cause}
+                </p>
+              </CardContent>
+            </Card>
             <Card>
               <CardHeader>
                 <h3 className="text-xl font-semibold">How your money will be used</h3>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700">
-                  Your generous donation will be used to support various initiatives aimed at improving the lives of
-                  those in need. This includes providing essential resources such as food, clean water, and medical
-                  supplies to communities facing hardship. Additionally, funds will be allocated to educational
-                  programs, infrastructure development, and emergency relief efforts. We are committed to ensuring that
-                  every contribution makes a meaningful impact and helps create lasting positive change in the lives of
-                  beneficiaries.
+                {post.donationUsage}
                 </p>
               </CardContent>
             </Card>
