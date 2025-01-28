@@ -3,7 +3,7 @@ import { Suspense } from "react"
 import DashboardContent from "./DashboardContent"
 
 async function getPosts() {
-  const res = await fetch(`http://localhost:5000/api/donation`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/donation`, {
     method: 'GET',
     cache: 'no-store',
     headers: {

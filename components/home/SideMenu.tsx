@@ -26,7 +26,7 @@ export function SideMenu() {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/auth/logout", { withCredentials: true });
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/logout`, { withCredentials: true });
       if (response.status === 200) {
         router.push("/login");
       }
