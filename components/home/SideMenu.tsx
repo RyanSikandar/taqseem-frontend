@@ -17,8 +17,23 @@ import {
   faDonate
 } from "@fortawesome/free-solid-svg-icons";
 import { Menu } from 'lucide-react';
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export function SideMenu() {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/auth/logout", { withCredentials: true });
+      if (response.status === 200) {
+        router.push("/login");
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -72,7 +87,7 @@ export function SideMenu() {
           </div>
         </div>
         <SheetFooter>
-          <Button className="mt-5 bg-black text-white hover:bg-[#F7AB0A] hover:text-white">
+          <Button className="mt-5 bg-black text-white hover:bg-[#F7AB0A] hover:text-white" onClick={handleLogout}>
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
               className="w-4 mr-4"

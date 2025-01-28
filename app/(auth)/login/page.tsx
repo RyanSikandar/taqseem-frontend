@@ -47,6 +47,14 @@ const Login = () => {
         router.push("/dashboard");
       } else {
         console.error("Login failed");
+        form.setError("email", {
+          type: "manual",
+          message: "Invalid email or password"
+        })
+        form.setError("password", {
+          type: "manual",
+          message: "Invalid email or password"
+        })
       }
     } catch (error) {
       console.error("Error submitting the form", error);
@@ -93,6 +101,11 @@ const Login = () => {
                 </FormItem>
               )}
             />
+            {
+              form.formState.errors.email && (
+                <div className="text-xs text-red-500 dark:text-red-400 ml-5">{form.formState.errors.email.message}</div>
+              )
+            }
             <FormField
               control={form.control}
               name="password"
