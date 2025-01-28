@@ -1,5 +1,4 @@
 import Navbar from "@/components/home/Navbar";
-import { SideMenu } from "@/components/home/SideMenu";
 import { NavigationProvider } from "@/context/navigation-context";
 
 const donationPageLayout = ({ children }: { children: React.ReactNode }) => {
