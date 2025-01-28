@@ -8,12 +8,12 @@ type LayoutProps = {
 export default function Layout({ children }: LayoutProps) {
     return (
         <NavigationProvider>
-        <div className="min-h-screen bg-white">
-            <Navbar showActionButtons={false} showSearchBar={false}/>
-            <main>
-                {children}
-            </main>
-        </div>
+            <div className="min-h-screen bg-white">
+                <Navbar showActionButtons={false} showSearchBar={false} />
+                <main>
+                    {children}
+                </main>
+            </div>
         </NavigationProvider>
     );
 }

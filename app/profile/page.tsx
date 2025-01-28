@@ -1,78 +1,52 @@
-"use client";
+'use server'
 
-import { useEffect, useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
-import { ProfileData } from "@/types/profileData";
+import { Suspense } from "react";
+import ProfilePage from "./ProfileData";
+import { cookies } from "next/headers";
 
-export default function ProfilePage() {
-  const [formData, setFormData] = useState<ProfileData>({
-    name: "John Doe",
-    email: "",
-    image: "",
-    description: "",
-    cnic: 0,
-    location: "",
-  });
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/user`, {
-        method: 'GET',
-        cache: 'no-store',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      })
-      if (!res.ok) {
-        throw new Error("Failed to fetch data")
-      }
-      const data = await res.json()
-      setFormData(data)
+async function getProfile() {
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+    if (!backendUrl) {
+        throw new Error("Backend URL is not defined");
     }
-    fetchData()
-  },[])
-  return (
-    <div className="h-screen p-4 flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-auto ">
-        <CardHeader className="flex flex-col items-center gap-4 pt-8 pb-6">
-          <Avatar className="h-24 w-24">
-            <AvatarImage src={`${formData.image}`} alt="@shadcn" />
-            <AvatarFallback>JD</AvatarFallback>
-          </Avatar>
-          <div className="grid gap-1 text-center">
-            <div className="text-2xl font-bold">{formData.name}</div>
-            <div className="text-sm text-muted-foreground">
-              {formData.email}
-            </div>
-          </div>
-        </CardHeader>
-        <Separator />
-        <CardContent className="grid gap-4 p-6">
-          <div className="grid gap-2">
-            <div className="text-sm font-medium text-black">About</div>
-            <div className="text-sm text-muted-foreground">
-              {formData.description}
-            </div>
-          </div>
-          <div className="grid gap-2">
-            <div className="text-sm font-medium text-black">Location</div>
-            <div className="text-sm text-muted-foreground">
-              {formData.location}
-            </div>
-          </div>
-          <div className="grid gap-2">
-            <div className="text-sm font-medium text-black">CNIC</div>
-            <div className="text-sm text-muted-foreground">{formData.cnic}</div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
+
+    const tokenCookie = cookies().get('token'); 
+
+    if (!tokenCookie?.value) {
+        throw new Error("Authentication token not found in cookies");
+    }
+
+    const res = await fetch(`${backendUrl}/api/auth/user`, {
+        method: 'GET',
+        cache: 'force-cache',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': `token=${tokenCookie.value}`, 
+        },
+    });
+
+    if (!res.ok) {
+        throw new Error(`Failed to fetch data: ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+}
+
+export default async function Page() {
+    let profile;
+
+    try {
+        profile = await getProfile();
+    } catch (error: any) {
+        console.error(error.message);
+        return <div>Error: {error.message}</div>;
+    }
+
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ProfilePage profileData={profile} />
+        </Suspense>
+    );
 }
