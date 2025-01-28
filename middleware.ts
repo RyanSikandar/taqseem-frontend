@@ -35,5 +35,5 @@ export function middleware(request: NextRequest) {
 
 // Update matcher configuration
 export const config = {
-    matcher: ['/', '/profile/:path*', '/login', '/favourite/:path*', '/add-donation/:path*','/donation/:path*'],
+    matcher: ['/', '/profile/:path*', '/login', '/favourite/:path*', '/add-donation/:path*','/donation/:path*','/your-donations/:path*','/your-volunteers/:path*'],
 };
