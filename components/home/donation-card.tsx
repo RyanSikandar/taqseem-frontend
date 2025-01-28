@@ -6,24 +6,25 @@ import { Heart, Share2 } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import type { Post } from '@/types/post'
+import type { Donation, Post } from '@/types/post'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useFavourites } from '@/context/favourites-context'
 
 interface DonationCardProps {
-  post: Post;
+  post: Donation;
   onDonate: () => void;
 }
 
 export function DonationCard({ post, onDonate }: DonationCardProps) {
   const router = useRouter();
   const { favourites, toggleFavourite } = useFavourites();
-  const isLiked = favourites.some(fav => fav.id === post.id)
+  const isLiked = favourites.some(fav => fav._id === post._id)
   console.log(favourites);
 
   const handleLike = () => {
     console.log('Like button clicked');
+    console.log(post)
     toggleFavourite(post)
   }
 
@@ -56,7 +57,7 @@ export function DonationCard({ post, onDonate }: DonationCardProps) {
       </div>
       <CardContent className="p-4 space-y-3">
         <div className="space-y-2">
-          <Link href={`/donation/${post.id}`}>
+          <Link href={`/donation/${post._id}`}>
             <h2 className="text-base font-semibold hover:underline">{post.title}</h2>
           </Link>
           <p className="text-xs text-muted-foreground line-clamp-2">{post.description}</p>
@@ -75,7 +76,7 @@ export function DonationCard({ post, onDonate }: DonationCardProps) {
         <Button
           className="w-full bg-black hover:bg-[#F7AB0A] text-sm py-1"
           onClick={() => {
-            router.push(`/donation/${post.id}`)
+            router.push(`/donation/${post._id}`)
           }}
         >
           Donate
@@ -84,7 +85,7 @@ export function DonationCard({ post, onDonate }: DonationCardProps) {
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full overflow-hidden">
               <Image
-                src={post.author.avatar || "/placeholder.svg"}
+                src={post.author.image || "/placeholder.svg"}
                 alt={`${post.author.name}'s profile picture`}
                 width={32}
                 height={32}
