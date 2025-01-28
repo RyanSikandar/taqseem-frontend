@@ -1,23 +1,26 @@
-"use client"
-import React from "react"
-import { loginSchema } from "@/schemas/auth.schema"
-import type * as z from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import Image from "next/image"
-import { Cursor, useTypewriter } from "react-simple-typewriter"
-import { FaApple, FaGoogle } from "react-icons/fa"
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
-import Link from "next/link"
+"use client";
+
+import React from "react";
+import { loginSchema } from "@/schemas/auth.schema";
+import type * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Image from "next/image";
+import { Cursor, useTypewriter } from "react-simple-typewriter";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [text] = useTypewriter({
-    words: ["Hi, We missed you.", "Please Login to spread happiness !"],
+    words: ["Hi, We missed you.", "Please Login to spread happiness!"],
     loop: true,
     delaySpeed: 2000,
-  })
+  });
+
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -25,13 +28,30 @@ const Login = () => {
       email: "",
       password: "",
     },
-  })
+  });
 
-  const isLoading = form.formState.isSubmitting
+  const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: 'include'
+      });
 
-  const handleSubmit = async (values: z.infer<typeof loginSchema>) => {
-    console.log(values)
-  }
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData);
+        router.push("/dashboard");
+      } else {
+        console.error("Login failed");
+      }
+    } catch (error) {
+      console.error("Error submitting the form", error);
+    }
+  };
 
   return (
     <div className="flex h-screen w-full items-center justify-center px-4">
@@ -56,7 +76,7 @@ const Login = () => {
         </div>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-3">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
             <FormField
               control={form.control}
               name="email"
@@ -65,7 +85,6 @@ const Login = () => {
                   <FormLabel className="text-xs uppercase dark:text-primary">Email</FormLabel>
                   <FormControl>
                     <Input
-                      disabled={isLoading}
                       className="h-8 border-b-2 border-gray-300 bg-[#EEEEEE] text-sm outline-none focus:border-black sm:h-10"
                       placeholder="Enter your email"
                       {...field}
@@ -83,7 +102,6 @@ const Login = () => {
                   <FormControl>
                     <Input
                       type="password"
-                      disabled={isLoading}
                       className="h-8 border-b-2 border-gray-300 bg-[#EEEEEE] text-sm outline-none focus:border-black sm:h-10"
                       placeholder="Enter your password"
                       {...field}
@@ -107,17 +125,10 @@ const Login = () => {
                 size="sm"
                 className="w-full rounded-[6px] bg-black px-4 py-2 text-sm font-medium text-white transition-all hover:bg-black/90 sm:py-3 sm:text-base"
                 type="submit"
+                disabled={form.formState.isSubmitting}
+                aria-busy={form.formState.isSubmitting}
               >
-                {isLoading ? "Loading..." : "Log In"}
-              </Button>
-
-              <Button
-                variant="default"
-                size="sm"
-                className="w-full rounded-[6px] border-2 border-[#F7AB0A] bg-white px-4 py-2 text-sm font-medium text-[#F7AB0A] transition-all duration-300 ease-in-out hover:bg-[#F7AB0A]/80 hover:text-white sm:py-3 sm:text-base"
-                type="submit"
-              >
-                {isLoading ? "Loading..." : "Continue as Donor"}
+                {form.formState.isSubmitting ? "Loading..." : "Log In"}
               </Button>
             </div>
           </form>
@@ -126,40 +137,6 @@ const Login = () => {
             <span className="h-px flex-1 bg-black"></span>
             <span className="mx-2 text-xs sm:text-sm">or</span>
             <span className="h-px flex-1 bg-black"></span>
-          </div>
-
-          <div className="space-y-2">
-            <Button
-              variant="default"
-              size="sm"
-              className="w-full rounded-[6px] border-2 border-black bg-white px-4 py-2 text-xs text-black transition-all hover:bg-black hover:text-white sm:py-3 sm:text-sm"
-              type="submit"
-            >
-              {isLoading ? (
-                "Loading..."
-              ) : (
-                <div className="flex items-center justify-center">
-                  Continue with
-                  <FaGoogle className="ml-2" size={16} />
-                </div>
-              )}
-            </Button>
-
-            <Button
-              variant="default"
-              size="sm"
-              className="w-full rounded-[6px] border-2 border-black bg-white px-4 py-2 text-xs text-black transition-all hover:bg-black hover:text-white sm:py-3 sm:text-sm"
-              type="submit"
-            >
-              {isLoading ? (
-                "Loading..."
-              ) : (
-                <div className="flex items-center justify-center">
-                  Continue with
-                  <FaApple className="ml-2" size={18} />
-                </div>
-              )}
-            </Button>
           </div>
         </Form>
 
@@ -174,8 +151,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
-
+export default Login;
