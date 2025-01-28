@@ -13,6 +13,11 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/dashboard', request.url));
     }
 
+    if (token && request.nextUrl.pathname === '/register') {
+        console.log('Redirecting logged-in user to dashboard');
+        return NextResponse.redirect(new URL('/dashboard', request.url));
+    }
+
     if (token) {
         // If token exists and trying to access the home page, redirect to dashboard
         if (request.nextUrl.pathname === '/') {
@@ -35,5 +40,5 @@ export function middleware(request: NextRequest) {
 
 // Update matcher configuration
 export const config = {
-    matcher: ['/profile/:path*', '/login', '/favourite/:path*', '/add-donation/:path*','/donation/:path*','/your-donations/:path*','/your-volunteers/:path*'],
+    matcher: ['/profile/:path*', '/login', '/favourite/:path*', '/add-donation/:path*', '/donation/:path*', '/your-donations/:path*', '/your-volunteers/:path*', '/register/:path*'],
 };

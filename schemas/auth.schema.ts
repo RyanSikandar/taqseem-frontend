@@ -16,6 +16,13 @@ export const registerSchema = z
       .min(1, "Password is required.")
       .min(8, "Password must be at least 8 characters."),
     confirmPassword: z.string().min(8, "Confirm Password is required."),
+    description: z.string().max(1000, "Maximum length of Description is 1000 characters."),
+    cnic: z
+      .string()
+      .regex(/^\d+$/, "CNIC must contain only digits.")
+      .transform((value) => Number(value)),
+    location: z.string().min(1, "Location is required."),
+    image: z.string().min(1, "Image is required."),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password and Confirm Password does not match.",
