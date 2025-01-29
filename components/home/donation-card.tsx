@@ -41,18 +41,20 @@ export function DonationCard({ post, onDonate }: DonationCardProps) {
       }
     }
   }
-  
+
   // Calculate the progress percentage
   const progressPercentage = (post.currentAmount / post.targetAmount) * 100
 
   return (
-    <Card className="border shadow-md max-w-sm mx-auto">
+    <Card className="border shadow-md mx-auto w-full">
       <div className="relative rounded-lg overflow-hidden h-48">
         <Image
           src={post.image[0] || "/placeholder.svg"}
           alt={post.title}
-          layout="fill"
-          objectFit="cover"
+          fill={true}
+          style={{
+            objectFit: "contain"
+          }}
         />
       </div>
       <CardContent className="p-4 space-y-3">
