@@ -18,9 +18,10 @@ async function getUserDonations() {
     },
   })
   if (!res.ok) {
-    throw new Error("Failed to fetch data")
+    return "There was an error"
   }
   const data = await res.json()
+  console.log(data)
   return data.donations
 
 }
@@ -29,8 +30,6 @@ export default async function DonationsPage() {
 
   const donations = await getUserDonations()
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <UserDonations donations={donations} />
-    </Suspense>
+    <UserDonations donations={donations} />
   )
 }
