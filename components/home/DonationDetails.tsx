@@ -1,49 +1,89 @@
 "use client"
 
-import React, { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Check, X } from "lucide-react"
+import React from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { Donation } from "@/types";
 
-// This is a mock function. Replace it with actual data fetching logic.
-const useDonationDetails = (id: string) => {
-  // Mock data
-  return {
-    id: "1",
-    author: {
-      name: "Rayan Sikandar",
-      location: "Islamabad, Pakistan",
-      avatar: "/assets/images/avatar.png",
-    },
-    image: ["/assets/images/needy.webp", "/assets/images/needy.webp", "/assets/images/needy.webp"],
-    title: "Need donation for school renovation",
-    description:
-      "With your help, we aim to create a modern and comfortable learning environment that fosters creativity, innovation, and excellence in education. The impact of your contribution will extend beyond the walls of our school.",
-    currentAmount: 1000,
-    targetAmount: 7000,
-    daysLeft: 1,
-    IBAN: "PK36SCBL0000001123456702",
-    BankName: "Standard Chartered Bank",
-    AccountTitle: "Rayan Sikandar",
-    latestDonations: [
-      { id: "1", name: "John Doe", amount: 100, verified: false },
-      { id: "2", name: "Jane Smith", amount: 200, verified: true },
-      { id: "3", name: "Alice Johnson", amount: 150, verified: false },
-    ],
+interface DonationProps {
+  id: string;
+  donation: Donation;
+}
+
+interface DonationRecord {
+  _id: string;
+  donation: string;
+  donor: {
+    _id: string;
+    name: string;
+    image: string;
+    location: string;
+  };
+  amount: number;
+  verified: boolean;
+}
+
+// Fetch donations for the table
+async function fetchDonations(donationId: string): Promise<DonationRecord[]> {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/donation/${donationId}/contributions`, {
+    credentials: "include",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to fetch donations");
+  }
+  const data = await response.json();
+  return data.contributions;
+}
+
+// Verify a donation record
+async function verifyDonation(contributionId: string): Promise<void> {
+  console.log("Verifying donation", contributionId);
+  const body = { id: contributionId };
+  console.log("Body", body);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/donation/contribution/verify`, {
+    method: "PATCH",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!response.ok) {
+    throw new Error("Failed to verify donation");
   }
 }
 
-export default function DonationDetails({ id }: { id: string }) {
-  const donation = useDonationDetails(id)
-  const [latestDonations, setLatestDonations] = useState(donation.latestDonations)
+export default function DonationDetails({ id, donation }: DonationProps) {
+  const queryClient = useQueryClient();
+
+  // Fetch donations for the table
+  const { data: latestDonations, isLoading, isError } = useQuery({
+    queryKey: ["donations", id], // Unique key for this query
+    queryFn: () => fetchDonations(id),
+    staleTime: 1000 * 60 * 5, 
+  });
+
+  // Mutation for verifying a donation
+  const verifyMutation = useMutation({
+    mutationFn: verifyDonation,
+    onSuccess: () => {
+      // Invalidate and refetch the donations query after successful verification
+      queryClient.invalidateQueries({ queryKey: ["donations", id] });
+    },
+  });
 
   const handleVerify = (donationId: string) => {
-    setLatestDonations((prevDonations) =>
-      prevDonations.map((d) => (d.id === donationId ? { ...d, verified: true } : d)),
-    )
+    verifyMutation.mutate(donationId);
+  };
+
+  if (isLoading) {
+    return <div>Loading donations...</div>;
+  }
+
+  if (isError) {
+    return <div>Failed to load donations.</div>;
   }
 
   return (
@@ -53,7 +93,7 @@ export default function DonationDetails({ id }: { id: string }) {
           <CardHeader>
             <div className="flex items-center space-x-4">
               <Avatar>
-                <AvatarImage src={donation.author.avatar} alt={donation.author.name} />
+                <AvatarImage src={donation.author.image} alt={donation.author.name} />
                 <AvatarFallback>{donation.author.name.charAt(0)}</AvatarFallback>
               </Avatar>
               <div>
@@ -69,7 +109,7 @@ export default function DonationDetails({ id }: { id: string }) {
               <img
                 src={donation.image[0] || "/placeholder.svg"}
                 alt={donation.title}
-                className="w-full h-64 object-cover rounded-lg"
+                className="w-full h-64 object-contain rounded-lg"
               />
             </div>
             <p className="text-gray-700 mb-4">{donation.description}</p>
@@ -99,9 +139,9 @@ export default function DonationDetails({ id }: { id: string }) {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {latestDonations.map((d) => (
-                    <TableRow key={d.id}>
-                      <TableCell>{d.name}</TableCell>
+                  {latestDonations?.map((d) => (
+                    <TableRow key={d._id}>
+                      <TableCell>{d.donor.name}</TableCell>
                       <TableCell>Rs. {d.amount}</TableCell>
                       <TableCell>
                         {d.verified ? (
@@ -112,7 +152,7 @@ export default function DonationDetails({ id }: { id: string }) {
                       </TableCell>
                       <TableCell>
                         {!d.verified && (
-                          <Button size="sm" variant="outline" onClick={() => handleVerify(d.id)}>
+                          <Button size="sm" variant="outline" onClick={() => handleVerify(d._id)}>
                             Verify
                           </Button>
                         )}
@@ -126,6 +166,5 @@ export default function DonationDetails({ id }: { id: string }) {
         </Card>
       </div>
     </div>
-  )
+  );
 }
-
