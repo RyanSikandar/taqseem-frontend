@@ -12,27 +12,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useRouter } from "next/navigation";
+import { Donation } from "@/types";
 
-//mock implementaion, api fix pls
-const useUserDonations = () => {
-  // Mock data
-  return {
-    donations: [
-      {
-        id: "1",
-        title: "School Renovation Project",
-        description: "Renovating local school to improve learning environment",
-        currentAmount: 1000,
-        targetAmount: 7000,
-        daysLeft: 30,
-        image: ["/assets/images/needy.webp"],
-      },
-    ],
-  };
-};
+interface UserDonationsProps {
+  donations: Donation[];
+}
 
-export default function UserDonations() {
-  const { donations } = useUserDonations();
+export default function UserDonations({ donations }: UserDonationsProps) {
+
   const router = useRouter();
 
   return (
@@ -56,7 +43,7 @@ export default function UserDonations() {
             </div>
           ) : (
             donations.map((donation) => (
-              <Card key={donation.id} className="overflow-hidden">
+              <Card key={donation._id} className="overflow-hidden">
                 <CardHeader className="p-0">
                   <div className="relative h-48 w-full">
                     <img
@@ -91,7 +78,7 @@ export default function UserDonations() {
                   <Button
                     className="bg-black hover:bg-[#F7AB0A] text-white"
                     onClick={() =>
-                      router.push(`/donation/detail/${donation.id}`)
+                      router.push(`/donation/detail/${donation._id}`)
                     }
                   >
                     View Details
