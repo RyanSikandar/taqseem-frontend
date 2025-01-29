@@ -11,7 +11,7 @@ async function getUserDonations() {
   }
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/donation/user-donations`, {
     method: 'GET',
-    cache: 'no-store',
+    cache: 'no-cache',
     headers: {
       'Content-Type': 'application/json',
       'Cookie': `token=${tokenCookie.value}`
