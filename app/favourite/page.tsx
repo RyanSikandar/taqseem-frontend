@@ -36,7 +36,7 @@ export default function FavoriteDonations() {
                                         <img
                                             src={donation.image[0] || "/placeholder.svg"}
                                             alt={donation.title}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-contain"
                                         />
                                         <div className="absolute top-2 right-2">
                                             <Button size="icon" variant="secondary" className="rounded-full bg-white">

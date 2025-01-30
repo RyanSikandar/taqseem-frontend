@@ -49,7 +49,7 @@ export default function UserDonations({ donations }: UserDonationsProps) {
                     <img
                       src={donation.image[0] || "/placeholder.svg"}
                       alt={donation.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
                   </div>
                 </CardHeader>
