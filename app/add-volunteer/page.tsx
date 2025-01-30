@@ -16,15 +16,11 @@ import {
 } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
 interface FormData {
-  topic: string;
+  title: string;
   description: string;
   cause: string;
-  amount: number;
+  help: string;
   days: number;
-  IBAN: string;
-  accountTitle: string;
-  bankName: string;
-  donationUse: string;
 }
 
 export default function RequestVolunteer() {
@@ -86,7 +82,7 @@ export default function RequestVolunteer() {
     <div className="min-h-screen bg-gray-50 p-10 mt-10">
       <div className="max-w-4xl mx-auto">
         <Card className="p-6">
-          <h1 className="text-2xl font-bold mb-6">Raquest Volunteer</h1>
+          <h1 className="text-2xl font-bold mb-6">Request Volunteer</h1>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Image Upload Area */}
@@ -140,14 +136,14 @@ export default function RequestVolunteer() {
             {/* Topic Input */}
             <div className="space-y-2">
               <label htmlFor="topic" className="text-sm font-medium">
-                Topic
+                Title
               </label>
               <Input
                 id="topic"
                 placeholder="e.g., teach maths to underprivileged children"
-                {...register("topic", { required: true })}
+                {...register("title", { required: true })}
               />
-              {errors.topic && (
+              {errors.title && (
                 <p className="text-sm text-red-500">Topic is required</p>
               )}
             </div>
@@ -204,9 +200,9 @@ export default function RequestVolunteer() {
                 id="donationUse"
                 placeholder="Write detailed explanation about how it will help the community"
                 className="min-h-[150px]"
-                {...register("donationUse", { required: true })}
+                {...register("help", { required: true })}
               />
-              {errors.donationUse && (
+              {errors.help && (
                 <p className="text-sm text-red-500">Usage is required</p>
               )}
             </div>

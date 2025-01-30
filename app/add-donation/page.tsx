@@ -140,7 +140,7 @@ export default function RaiseCause() {
             {/* Topic Input */}
             <div className="space-y-2">
               <label htmlFor="topic" className="text-sm font-medium">
-                Topic
+                Title
               </label>
               <Input
                 id="topic"

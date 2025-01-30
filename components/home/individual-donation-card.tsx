@@ -147,7 +147,6 @@ export default function DonationPage({ post }: DonationPageProps) {
               </CardFooter>
             </Card>
           </div>
-
           <div className="flex flex-col gap-8">
             <Card>
               <CardHeader>
