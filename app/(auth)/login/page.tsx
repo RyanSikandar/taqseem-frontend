@@ -12,8 +12,10 @@ import { Cursor, useTypewriter } from "react-simple-typewriter";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Login = () => {
+  const queryClient = useQueryClient();
   const [text] = useTypewriter({
     words: ["Hi, We missed you.", "Please Login to spread happiness!"],
     loop: true,
@@ -44,6 +46,7 @@ const Login = () => {
       if (response.ok) {
         const responseData = await response.json();
         console.log(responseData);
+        queryClient.invalidateQueries({ queryKey: ["authStatus"] });
         router.push("/dashboard");
       } else {
         console.error("Login failed");
