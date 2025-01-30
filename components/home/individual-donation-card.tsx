@@ -18,23 +18,66 @@ import {
 import type { Donation } from "@/types"
 import { useToast } from "@/hooks/use-toast"
 import { Input } from "../ui/input"
+import { useMutation } from "@tanstack/react-query"
 export interface DonationPageProps {
   post: Donation
 }
 
+export interface addContributionProps {
+  amountDonated: number;
+  donationId: string;
+}
+
+const addContribution = async ({ amountDonated, donationId }: addContributionProps) => {
+  const data = {
+    amount: amountDonated
+  }
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/donation/${donationId}/contribute`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(data),
+  })
+
+  if (!response.ok) {
+    throw new Error("Failed to add contribution")
+  }
+
+  return response.json()
+}
+
 export default function DonationPage({ post }: DonationPageProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [amountDonated, setAmountDonated] = useState<number | "">("");
   const { toast } = useToast()
 
-  function handleClick() {
-    setIsDialogOpen(false)
-    toast({
-      title: "Donation has been sent!",
-      description: `Thank you for your generous donation ${post.author.name}. `,
-      variant: "default",
-      className: "bg-[#F7AB0A] text-black"
+  const verifyMutation = useMutation({
+    mutationFn: addContribution,
+    onSuccess: () => {
+      toast({
+        title: "Donation has been sent!",
+        description: `Thank you for your generous donation ${post.author.name}. `,
+        variant: "default",
+        className: "bg-[#F7AB0A] text-black"
 
-    })
+      })
+    },
+    onError: () => {
+      toast({
+        title: "Failed to send donation",
+        description: "An error occurred, Please try again",
+        variant: "destructive",
+        className: "bg-red-500 text-white"
+      })
+    }
+  });
+
+  function handleClick() {
+    if (!amountDonated || amountDonated < 0) return
+    setIsDialogOpen(false)
+    verifyMutation.mutate({ amountDonated: Number(amountDonated), donationId: post._id })
   }
 
   return (
@@ -103,14 +146,16 @@ export default function DonationPage({ post }: DonationPageProps) {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-700">Amount to donate (Rs):</h4>
-                    <Input type="number" placeholder="Enter amount" required />
+                    <Input type="number" placeholder="Enter amount" required value={amountDonated}
+                      onChange={(e) => setAmountDonated(e.target.value ? parseInt(e.target.value, 10) || "" : "")}
+                    />
                   </div>
                 </div>
               </CardContent>
               <CardFooter>
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                   <DialogTrigger asChild>
-                    <Button className="w-full bg-black hover:bg-[#F7AB0A]" size="lg">
+                    <Button className="w-full bg-black hover:bg-[#F7AB0A]" size="lg" disabled={!amountDonated || amountDonated <= 0} >
                       Send Donation
                     </Button>
                   </DialogTrigger>
@@ -180,7 +225,7 @@ export default function DonationPage({ post }: DonationPageProps) {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700">
-                {post.cause}
+                  {post.cause}
                 </p>
               </CardContent>
             </Card>
@@ -190,7 +235,7 @@ export default function DonationPage({ post }: DonationPageProps) {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700">
-                {post.donationUsage}
+                  {post.donationUsage}
                 </p>
               </CardContent>
             </Card>
