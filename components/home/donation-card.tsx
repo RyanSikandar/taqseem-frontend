@@ -6,7 +6,7 @@ import { Heart, Share2 } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import type { Donation, Post } from '@/types/post'
+import type { Donation } from '@/types/post'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useFavourites } from '@/context/favourites-context'

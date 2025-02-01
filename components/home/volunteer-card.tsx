@@ -6,11 +6,11 @@ import { Heart, Share2 } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import type { Post } from '@/types/post'
+import type { Volunteer } from '@/types/post'
 import { useRouter } from 'next/navigation'
 
 interface VolunteerCardProps {
-  post: Post;
+  post: Volunteer;
   onVolunteer: () => void;
 }
 
@@ -37,10 +37,10 @@ export function VolunteerCard({ post, onVolunteer }: VolunteerCardProps) {
   }
 
   // Calculate the progress percentage
-  const progressPercentage = (post.currentAmount / post.targetAmount) * 100
+  const progressPercentage = (post.currentVolunteers / post.targetVolunteers) * 100
 
   return (
-    <Card className="border shadow-md max-w-sm mx-auto">
+    <Card className="border shadow-md max-w-sm mx-auto w-full">
       <div className="relative rounded-lg overflow-hidden h-48">
         <Image
           src={post.image[0] || "/placeholder.svg"}
@@ -58,8 +58,8 @@ export function VolunteerCard({ post, onVolunteer }: VolunteerCardProps) {
             <Progress value={progressPercentage} className="h-2 [&>*]:bg-[#F7AB0A]/80" />
             <div className="flex items-center justify-between text-xs">
               <div className="flex items-center gap-1">
-                <span className="font-semibold">{post.currentAmount}</span>
-                <span className="text-muted-foreground">/ {post.targetAmount} People</span>
+                <span className="font-semibold">{post.currentVolunteers}</span>
+                <span className="text-muted-foreground">/ {post.targetVolunteers} People</span>
               </div>
               <span className="text-muted-foreground">{post.daysLeft} days left</span>
             </div>
@@ -68,7 +68,7 @@ export function VolunteerCard({ post, onVolunteer }: VolunteerCardProps) {
         <Button
           className="w-full bg-black hover:bg-[#F7AB0A] text-sm py-1"
           onClick={() => {
-            router.push(`/volunteer/${post.id}`)
+            router.push(`/volunteer/${post._id}`)
           }}
         >
           Volunteer
@@ -77,7 +77,7 @@ export function VolunteerCard({ post, onVolunteer }: VolunteerCardProps) {
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full overflow-hidden">
               <Image
-                src={post.author.avatar || "/placeholder.svg"}
+                src={post.author.image || "/placeholder.svg"}
                 alt={`${post.author.name}'s profile picture`}
                 width={32}
                 height={32}

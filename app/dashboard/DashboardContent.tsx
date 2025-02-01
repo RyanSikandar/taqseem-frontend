@@ -6,13 +6,14 @@ import { samplePosts } from '@/data/samplePosts'
 import { sampleVolunteerPosts } from '@/data/sampleVolunteers'
 import { VolunteerCard } from '@/components/home/volunteer-card'
 import useNavbarStore from '@/store/useNavbarStore'
-import { Donation, Post } from '@/types'
+import { Donation, Volunteer } from '@/types'
 
 interface DashboardContentProps {
-    initialPosts: Donation[]
-  }
+    donations: Donation[]
+    volunteers: Volunteer[]
+}
 
-export default function DashboardContent({ initialPosts }: DashboardContentProps) {
+export default function DashboardContent({ donations, volunteers }: DashboardContentProps) {
   const { button, isHydrated } = useNavbarStore();
 
   // check consistency when actual data returned by api calls is used from here
@@ -44,15 +45,15 @@ export default function DashboardContent({ initialPosts }: DashboardContentProps
             {
               button === 'donate' ?
 
-                (initialPosts.map(post => (
-                  <div key={post._id} className="flex">
-                    <DonationCard post={post} onDonate={() => handleDonate(post._id)} />
+                (donations.map(donation => (
+                  <div key={donation._id} className="flex">
+                    <DonationCard post={donation} onDonate={() => handleDonate(donation._id)} />
                   </div>
                 ))) :
                 (
-                  sampleVolunteerPosts.map(post => (
-                    <div key={post.id} className="flex">
-                      <VolunteerCard post={post} onVolunteer={() => handleVolunteer(post.id)} />
+                  volunteers.map(volunteer => (
+                    <div key={volunteer._id} className="flex">
+                      <VolunteerCard post={volunteer} onVolunteer={() => handleVolunteer(volunteer._id)} />
                     </div>
                   ))
                 )}

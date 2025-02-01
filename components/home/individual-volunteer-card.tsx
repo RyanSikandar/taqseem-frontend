@@ -112,7 +112,7 @@ export default function VolunteerPage({ post }: VolunteerPageProps) {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-semibold">Requested by</h3>
+                  <h3 className="text-xl font-semibold">Raised by</h3>
                   <a href="#" className="text-primary">
                     <MessageSquare />
                   </a>
@@ -121,8 +121,7 @@ export default function VolunteerPage({ post }: VolunteerPageProps) {
               <CardContent className="space-y-4">
                 <div className="flex items-start gap-4 p-4 rounded-lg border">
                   <Avatar>
-                    <AvatarImage src={`/placeholder.svg?height=40&width=40`} />
-                    <AvatarFallback>{post.author.avatar}</AvatarFallback>
+                    <AvatarImage src={`${post.author.image}`} />
                   </Avatar>
                   <div className="flex-1 space-y-1">
                     <div className="flex items-start justify-between">
@@ -137,91 +136,22 @@ export default function VolunteerPage({ post }: VolunteerPageProps) {
                 </div>
               </CardContent>
             </Card>
-
             <Card>
               <CardHeader>
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-semibold">Top Volunteers</h3>
-                  <Button
-                    variant="ghost"
-                    className="text-primary"
-                    onClick={() => setShowAllDonors(!showAllDonors)}
-                  >
-                    {showAllDonors ? "Show less" : "Show all"}
-                    <ArrowLeft className="h-4 w-4 rotate-180 ml-2" />
-                  </Button>
-                </div>
+                <h3 className="text-xl font-semibold">Donation Cause</h3>
               </CardHeader>
-              <CardContent className="space-y-4">
-                {showAllDonors
-                  ? donorsDat.map((donor, index) => (
-                      <div
-                        key={index}
-                        className="flex items-start gap-4 p-4 rounded-lg border"
-                      >
-                        <Avatar>
-                          <AvatarImage
-                            src={`/placeholder.svg?height=40&width=40`}
-                          />
-                          <AvatarFallback>{donor.name[0]}</AvatarFallback>
-                        </Avatar>
-                        <div className="flex-1 space-y-1">
-                          <div className="flex items-start justify-between">
-                            <div>
-                              <h4 className="font-semibold">{donor.name}</h4>
-                              <p className="text-sm text-gray-500">
-                                {donor.location}
-                              </p>
-                            </div>
-                            <div className="text-right">
-                              <div className="text-sm text-gray-500">
-                                {donor.time}
-                              </div>
-                            </div>
-                          </div>
-                          {donor.message && (
-                            <div className="flex items-start gap-2 text-sm text-gray-500">
-                              <MessageCircle className="h-4 w-4 mt-0.5" />
-                              <p>{donor.message}</p>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    ))
-                  : donorsDat.slice(0, 2).map((donor, index) => (
-                      <div
-                        key={index}
-                        className="flex items-start gap-4 p-4 rounded-lg border"
-                      >
-                        <Avatar>
-                          <AvatarImage
-                            src={`/placeholder.svg?height=40&width=40`}
-                          />
-                          <AvatarFallback>{donor.name[0]}</AvatarFallback>
-                        </Avatar>
-                        <div className="flex-1 space-y-1">
-                          <div className="flex items-start justify-between">
-                            <div>
-                              <h4 className="font-semibold">{donor.name}</h4>
-                              <p className="text-sm text-gray-500">
-                                {donor.location}
-                              </p>
-                            </div>
-                            <div className="text-right">
-                              <div className="text-sm text-gray-500">
-                                {donor.time}
-                              </div>
-                            </div>
-                          </div>
-                          {donor.message && (
-                            <div className="flex items-start gap-2 text-sm text-gray-500">
-                              <MessageCircle className="h-4 w-4 mt-0.5" />
-                              <p>{donor.message}</p>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    ))}
+              <CardContent>
+                <p className="text-gray-700">{post.cause}</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <h3 className="text-xl font-semibold">
+                  How your money will be used
+                </h3>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700">{post.donationUsage}</p>
               </CardContent>
             </Card>
           </div>
