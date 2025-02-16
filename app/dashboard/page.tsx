@@ -14,7 +14,6 @@ async function getDonations() {
     throw new Error("Failed to fetch data")
   }
   const data = await res.json()
-  console.log(data)
   return data.donations
 }
 
@@ -30,7 +29,6 @@ async function getVolunteers() {
     throw new Error("Failed to fetch data")
   }
   const data = await res.json()
-  console.log(data)
   return data.volunteers
 }
 

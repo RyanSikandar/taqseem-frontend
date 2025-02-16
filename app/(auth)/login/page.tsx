@@ -13,9 +13,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
+import useAdminStore from "@/store/useAdminStore";
 
 const Login = () => {
   const queryClient = useQueryClient();
+  const setIsAdmin = useAdminStore((state) => state.setIsAdmin);
   const [text] = useTypewriter({
     words: ["Hi, We missed you.", "Please Login to spread happiness!"],
     loop: true,
@@ -45,7 +47,8 @@ const Login = () => {
 
       if (response.ok) {
         const responseData = await response.json();
-        console.log(responseData);
+        console.log("responseData", responseData);
+        setIsAdmin(responseData.isAdmin);
         queryClient.invalidateQueries({ queryKey: ["authStatus"] });
         router.push("/dashboard");
       } else {

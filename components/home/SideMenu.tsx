@@ -21,10 +21,13 @@ import { Menu } from 'lucide-react';
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useAuth } from "@/context/auth-context";
+import useAdminStore from "@/store/useAdminStore";
 
 export function SideMenu() {
   const router = useRouter();
   const { isLoggedIn } = useAuth();
+  const isAdmin = useAdminStore((state) => state.isAdmin);
+
 
   const handleLogout = async () => {
     if (!isLoggedIn) {
@@ -65,7 +68,7 @@ export function SideMenu() {
           </div>
           {isLoggedIn &&
             <>
-              <div className="py-3">
+              {isAdmin && <> <div className="py-3">
                 <Link href="/your-donations">
                   <div className="flex text-xl hover:underline decoration-[#F7AB0A]">
                     <FontAwesomeIcon icon={faDonate} className="w-4 mr-4" />
@@ -73,12 +76,12 @@ export function SideMenu() {
                   </div>
                 </Link>
               </div>
-              <div className="py-3">
-                <Link href="/your-volunteers" className="flex text-xl hover:underline decoration-[#F7AB0A]">
-                  <FontAwesomeIcon icon={faHandshakeSimple} className="w-4 mr-4" />
-                  <p>Your Volunteers</p>
-                </Link>
-              </div>
+                <div className="py-3">
+                  <Link href="/your-volunteers" className="flex text-xl hover:underline decoration-[#F7AB0A]">
+                    <FontAwesomeIcon icon={faHandshakeSimple} className="w-4 mr-4" />
+                    <p>Your Volunteers</p>
+                  </Link>
+                </div></>}
               <div className="py-3">
                 <Link href="/profile">
                   <div className="flex text-xl hover:underline decoration-[#F7AB0A]">
@@ -87,18 +90,18 @@ export function SideMenu() {
                   </div>
                 </Link>
               </div>
-              <div className="py-3">
+              {isAdmin && <><div className="py-3">
                 <Link href="/add-donation" className="flex text-xl hover:underline decoration-[#F7AB0A]">
                   <FontAwesomeIcon icon={faPeopleRoof} className="w-4 mr-4" />
                   <p>Add a Donation</p>
                 </Link>
               </div>
-              <div className="py-3">
-                <Link href="/add-volunteer" className="flex text-xl hover:underline decoration-[#F7AB0A]">
-                  <FontAwesomeIcon icon={faPeopleRoof} className="w-4 mr-4" />
-                  <p>Add a Volunteer</p>
-                </Link>
-              </div>
+                <div className="py-3">
+                  <Link href="/add-volunteer" className="flex text-xl hover:underline decoration-[#F7AB0A]">
+                    <FontAwesomeIcon icon={faPeopleRoof} className="w-4 mr-4" />
+                    <p>Add a Volunteer</p>
+                  </Link>
+                </div></>}
               <div className="py-3">
                 <Link href="/favourite" className="flex text-xl hover:underline decoration-[#F7AB0A]">
                   <FontAwesomeIcon icon={faHeart} className="w-4 mr-4" />
