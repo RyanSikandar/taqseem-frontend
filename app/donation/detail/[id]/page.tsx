@@ -1,7 +1,7 @@
 'use server'
 import DonationDetails from "@/components/home/DonationDetails";
 
-export async function getDonation(id: string) {
+async function getDonation(id: string) {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   if (!backendUrl) {

@@ -31,7 +31,7 @@ const TwoStepRegistration = () => {
       email: "",
       password: "",
       confirmPassword: "",
-      cnic: "",
+      cnic: 0,
       description: "",
       image: "",
       location: "",

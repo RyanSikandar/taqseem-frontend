@@ -15,7 +15,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Post } from "@/types";
+import { Volunteer as Post } from "@/types";
 import { useState } from "react";
 
 export interface VolunteerPageProps {
@@ -142,16 +142,6 @@ export default function VolunteerPage({ post }: VolunteerPageProps) {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700">{post.cause}</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <h3 className="text-xl font-semibold">
-                  How your money will be used
-                </h3>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700">{post.donationUsage}</p>
               </CardContent>
             </Card>
           </div>

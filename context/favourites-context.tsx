@@ -1,5 +1,5 @@
 'use client'
-import { Donation, Post } from "@/types";
+import { Donation, DonationPost as Post } from "@/types";
 import { createContext, useContext, useEffect, useState } from "react";
 import { openDB, type IDBPDatabase } from 'idb';
 
